@@ -25,7 +25,7 @@ public class Customer
 
     public void PrintInfo()
     {
-        Console.WriteLine($"Ditt namn: {CustomerName} Ditt lösenord är: {CustomerPassword} Din kunvagn består just nu av: ...Kunvagn.....");
+        Console.WriteLine($"Ditt namn: {CustomerName} Ditt lösenord är: {CustomerPassword} Din kunvagn består just nu av: ...Kundvagn.....");
         //return $"Ditt namn: {CustomerName} Ditt lösenord är: {CustomerPassword} Din kunvagn består just nu av: ...Kunvagn.....";
     }
 }
