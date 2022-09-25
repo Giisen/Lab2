@@ -2,11 +2,11 @@
 
 public class Customer
 {
-    private string _CustomerName;
+    private readonly string _CustomerName;
     public string CustomerName
     {
         get { return _CustomerName; }
-        set { _CustomerName = value; }
+        
     }
 
     private string _CustomerPassword;
@@ -18,16 +18,15 @@ public class Customer
 
     public Customer(string name, string password)
     {
-        CustomerName = name;
+        _CustomerName = name;
         CustomerPassword = password;
         
     }
 
-    public void ToString()
+    public void PrintInfo()
     {
-        Console.WriteLine($"Ditt namn : {CustomerName}");
-        Console.WriteLine($"Ditt lösenord är: {CustomerPassword}");
-        Console.WriteLine($"Din kunvagn består just nu av: ...Kunvagn.....");
+        Console.WriteLine($"Ditt namn: {CustomerName} Ditt lösenord är: {CustomerPassword} Din kunvagn består just nu av: ...Kunvagn.....");
+        //return $"Ditt namn: {CustomerName} Ditt lösenord är: {CustomerPassword} Din kunvagn består just nu av: ...Kunvagn.....";
     }
 }
 
