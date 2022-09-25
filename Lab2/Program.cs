@@ -1,4 +1,4 @@
-﻿using System.Reflection.Metadata;
+﻿
 using Lab2;
 
 Console.WriteLine("Välkomen till butiken -* GIISEN *-\n");
@@ -17,22 +17,27 @@ CustomerNameList.Add(new string("Knatte"));
 CustomerNameList.Add(new string("Fnatte"));
 CustomerNameList.Add(new string("Tjatte"));
 
+//Customer[,] CustomerArray = new Customer[4,2];
+//CustomerArray
+
 //Skapar en lista med bara lösenord
 List<string> CustomerPasswordList = new List<string>();
 CustomerPasswordList.Add(new string("123"));
 CustomerPasswordList.Add(new string("321"));
 CustomerPasswordList.Add(new string("213"));
 
-string currentUser = string.Empty;
+// Diverse variabler
+string currentUser=string.Empty;
 bool meny1 = true;
 string inputMeny1 = string.Empty;
 bool inlogg = false;
 bool CustomerNamnOK=false;
 bool CustomerPassOk=false;
 
-    Console.WriteLine("\nVälj 1 om du är ny kund och vill skapa en profil\n" +
+
+Console.WriteLine("\nVälj 1 om du är ny kund och vill skapa en profil\n" +
                       "\nVälj 2 om du redan är kund och vill logga in");
-    inputMeny1 = Console.ReadLine();
+inputMeny1 = Console.ReadLine();
 
 while (meny1)
 {
@@ -42,6 +47,7 @@ while (meny1)
         string newCustomerName = Console.ReadLine();
         Console.WriteLine("Skriv in ditt lösenord:");
         string newCustomerPassword = Console.ReadLine();
+
         Customer Kund4 = new Customer(newCustomerName, newCustomerPassword); //Här skulle jag vilja ha ett annat namn på Kund4, ex newCustomerName
         CustomerNameList.Add(new string(Kund4.CustomerName));
         Console.WriteLine("Toppen! Nästa steg blir att logga in.");
@@ -61,6 +67,8 @@ while (meny1)
         Console.WriteLine("Dags att logga in\n");
         Console.WriteLine("Skriv in ditt användarnamn: ");
         string inputName = Console.ReadLine();
+
+        
 
         foreach (string name in CustomerNameList)
         {
@@ -101,13 +109,18 @@ while (meny1)
         {
             Console.WriteLine("Skriv in ditt lösenord:");
             string inputPassword = Console.ReadLine();
-            //bool passOK = CustomerPasswordList.Contains(inputPassword); //Här måste jag hitta ett sätt att jämföra lösenord med rätt person, inte Contains
 
+
+            if (CustomerList.Any(i => i == string.Format("{0} {1},name, password")))
+            {
+                Console.WriteLine("Yipi");
+            }
             foreach (string password in CustomerPasswordList)
             {
-                if (inputName == password)
+                if (inputPassword == password)
                 {
                     CustomerPassOk = true;
+                    break;
                 }
             }
 
@@ -116,8 +129,9 @@ while (meny1)
                 Console.WriteLine("Lösenordet är fel, försök igen");
             }
         }
+        inlogg = true;
+        meny1 = false;
 
-        
     }
 }
 
