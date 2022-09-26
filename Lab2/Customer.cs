@@ -16,7 +16,16 @@ public class Customer
         set { _CustomerPassword = value; }
     }
 
-    
+    public bool? logInOk = null;
+
+    public  TestLogin(bool CustomerNamnOK, string inputPassword)
+    {
+        if (CustomerNamnOK==true && CustomerPassword == inputPassword)
+        {
+            logInOk = true;
+            return logInOk;
+        }
+    }
 
     public Customer(string name, string password)
     {
@@ -26,16 +35,16 @@ public class Customer
     }
 
 
-    List<Customer> CustomerList = new List<Customer>();
+    //List<Customer> CustomerList = new List<Customer>();
 
     //Skapar en metod som lägger till Knatte, Fnatte och Tjatte
-    public void PreCustomer()
-    {
-        //List<Customer> CustomerList = new List<Customer>();
-        CustomerList.Add(new Customer("Knatte", "123"));
-        CustomerList.Add(new Customer("Fnatte", "321"));
-        CustomerList.Add(new Customer("Tjatte", "213"));
-    }
+    //public void PreCustomer()
+    //{
+    //    //List<Customer> CustomerList = new List<Customer>();
+    //    CustomerList.Add(new Customer("Knatte", "123"));
+    //    CustomerList.Add(new Customer("Fnatte", "321"));
+    //    CustomerList.Add(new Customer("Tjatte", "213"));
+    //}
 
 
     

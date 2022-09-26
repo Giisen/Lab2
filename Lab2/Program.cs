@@ -8,23 +8,15 @@ Console.WriteLine("Välkomen till butiken -* GIISEN *-\n");
 
 // Skapar en lista med både användarnamn och lösenord
 List<Customer> CustomerList = new List<Customer>();
-CustomerList.Add(new Customer("Knatte","123"));
-CustomerList.Add(new Customer("Fnatte","321"));
-CustomerList.Add(new Customer("Tjatte","213"));
+CustomerList.Add(new Customer("Knatte", "123"));
+CustomerList.Add(new Customer("Fnatte", "321"));
+CustomerList.Add(new Customer("Tjatte", "213"));
 
-// Öppnar en länk till min textfil med users och lösen
-StreamWriter sw = new StreamWriter("C:\\Users\\krist\\Documents\\GitHub\\Lab2\\Users.txt");
 
-//lägger till alla användare och lösen i listan CustomerList till textfilen.
-foreach (var i in CustomerList)
-{
-    sw.WriteLine($"{i.CustomerName} {i.CustomerPassword}");
-}
-
-//Stänger textfilen 
-sw.Close();
 
 Console.ReadLine();
+
+
 /*
 //Skapar en lista med bara användarnamn
 List<string> CustomerNameList = new List<string>();
@@ -43,7 +35,7 @@ CustomerPasswordList.Add(new string("213"));
 */
 
 // Diverse variabler
-string currentUser=string.Empty;
+Customer? currentUser = null; // Sätter currentUser till null.
 bool meny1 = true;
 string inputMeny1 = string.Empty;
 bool inlogg = false;
@@ -68,16 +60,6 @@ while (meny1)
         Customer nyKund = new Customer(newCustomerName, newCustomerPassword); 
         CustomerList.Add(new Customer(newCustomerName, newCustomerPassword));
 
-        // Öppnar en länk till min textfil med users och lösen
-        sw = new StreamWriter("C:\\Users\\krist\\Documents\\GitHub\\Lab2\\Users.txt");
-
-        // Lägger till nyKund i textfilen
-        sw.WriteLine($"{newCustomerName} {newCustomerPassword}");
-
-
-        //Stänger textfilen 
-        sw.Close();
-
         Console.WriteLine("Toppen! Nästa steg blir att logga in.");
     }
     else if (inputMeny1 == "2")
@@ -95,12 +77,12 @@ while (meny1)
         Console.WriteLine("Dags att logga in\n");
         Console.WriteLine("Skriv in ditt användarnamn: ");
         string inputName = Console.ReadLine();
-
-        foreach (var name in CustomerList)
+        foreach (var cust in CustomerList)
         {
-            if (CustomerList.Equals(inputName))
+            if (cust.CustomerName == inputName)// Jämför inputname med alla CustomerName i min lista.
             {
                 CustomerNamnOK=true;
+                currentUser = cust; //Får CustomerName på currentUser
             }
         }
 
@@ -130,28 +112,14 @@ while (meny1)
 
         }
 
-        while (!CustomerPassOk)
+        while (!CustomerPassOk && currentUser != null)
         {
             Console.WriteLine("Skriv in ditt lösenord:");
             string inputPassword = Console.ReadLine();
 
-            string checkuser = inputName + " " + inputPassword; 
+            currentUser.TestLogin(currentUser,inputPassword);
 
-            // Hänvisning till min textfil där användare och password är sparat
-            StreamReader srCheck = new StreamReader("C:\\Users\\krist\\Documents\\GitHub\\Lab2\\Users.txt");
-            // Läser första raden
-            string lineCheck = srCheck.ReadLine();
-
-            while (lineCheck != null)
-            {
-
-                if (checkuser == lineCheck)
-                {
-                    CustomerPassOk = true;
-                }
-                lineCheck = srCheck.ReadLine();
-                srCheck.Close();
-            }
+            
         }
         inlogg = true;
         meny1 = false;
@@ -164,7 +132,14 @@ while (meny1)
 Console.WriteLine("\nVälkommen in!");
 
 
-/*
+
+
+
+
+
+
+
+/*   Här nedan kan jag använda en textfil
 
 // Hänvisning till min textfil där användare och password är sparat
 StreamReader sr = new StreamReader("C:\\Users\\krist\\Documents\\GitHub\\Lab2\\Users.txt");
@@ -187,3 +162,5 @@ Console.ReadLine();
 //Console.WriteLine("\nVälkommen in!");
 
 */
+
+
