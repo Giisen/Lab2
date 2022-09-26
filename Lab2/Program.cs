@@ -1,7 +1,9 @@
-﻿
+﻿using System.IO;
 using Lab2;
 
 Console.WriteLine("Välkomen till butiken -* GIISEN *-\n");
+
+
 
 
 // Skapar en lista med både användarnamn och lösenord
@@ -10,7 +12,20 @@ CustomerList.Add(new Customer("Knatte","123"));
 CustomerList.Add(new Customer("Fnatte","321"));
 CustomerList.Add(new Customer("Tjatte","213"));
 
+// Öppnar en länk till min textfil med users och lösen
+StreamWriter sw = new StreamWriter("C:\\Users\\krist\\Documents\\GitHub\\Lab2\\Users.txt");
 
+//lägger till alla användare och lösen i listan CustomerList till textfilen.
+foreach (var i in CustomerList)
+{
+    sw.WriteLine($"{i.CustomerName} {i.CustomerPassword}");
+}
+
+//Stänger textfilen 
+sw.Close();
+
+Console.ReadLine();
+/*
 //Skapar en lista med bara användarnamn
 List<string> CustomerNameList = new List<string>();
 CustomerNameList.Add(new string("Knatte"));
@@ -25,6 +40,7 @@ List<string> CustomerPasswordList = new List<string>();
 CustomerPasswordList.Add(new string("123"));
 CustomerPasswordList.Add(new string("321"));
 CustomerPasswordList.Add(new string("213"));
+*/
 
 // Diverse variabler
 string currentUser=string.Empty;
@@ -48,8 +64,20 @@ while (meny1)
         Console.WriteLine("Skriv in ditt lösenord:");
         string newCustomerPassword = Console.ReadLine();
 
-        Customer Kund4 = new Customer(newCustomerName, newCustomerPassword); //Här skulle jag vilja ha ett annat namn på Kund4, ex newCustomerName
-        CustomerNameList.Add(new string(Kund4.CustomerName));
+        //Lägger till nyKund i CustomerList
+        Customer nyKund = new Customer(newCustomerName, newCustomerPassword); 
+        CustomerList.Add(new Customer(newCustomerName, newCustomerPassword));
+
+        // Öppnar en länk till min textfil med users och lösen
+        sw = new StreamWriter("C:\\Users\\krist\\Documents\\GitHub\\Lab2\\Users.txt");
+
+        // Lägger till nyKund i textfilen
+        sw.WriteLine($"{newCustomerName} {newCustomerPassword}");
+
+
+        //Stänger textfilen 
+        sw.Close();
+
         Console.WriteLine("Toppen! Nästa steg blir att logga in.");
     }
     else if (inputMeny1 == "2")
@@ -68,13 +96,10 @@ while (meny1)
         Console.WriteLine("Skriv in ditt användarnamn: ");
         string inputName = Console.ReadLine();
 
-        
-
-        foreach (string name in CustomerNameList)
+        foreach (var name in CustomerList)
         {
-            if (inputName == name)
+            if (CustomerList.Equals(inputName))
             {
-                currentUser = name;
                 CustomerNamnOK=true;
             }
         }
@@ -110,23 +135,22 @@ while (meny1)
             Console.WriteLine("Skriv in ditt lösenord:");
             string inputPassword = Console.ReadLine();
 
+            string checkuser = inputName + " " + inputPassword; 
 
-            if (CustomerList.Any(i => i == string.Format("{0} {1},name, password")))
+            // Hänvisning till min textfil där användare och password är sparat
+            StreamReader srCheck = new StreamReader("C:\\Users\\krist\\Documents\\GitHub\\Lab2\\Users.txt");
+            // Läser första raden
+            string lineCheck = srCheck.ReadLine();
+
+            while (lineCheck != null)
             {
-                Console.WriteLine("Yipi");
-            }
-            foreach (string password in CustomerPasswordList)
-            {
-                if (inputPassword == password)
+
+                if (checkuser == lineCheck)
                 {
                     CustomerPassOk = true;
-                    break;
                 }
-            }
-
-            if (!CustomerPassOk)
-            {
-                Console.WriteLine("Lösenordet är fel, försök igen");
+                lineCheck = srCheck.ReadLine();
+                srCheck.Close();
             }
         }
         inlogg = true;
@@ -136,4 +160,30 @@ while (meny1)
 }
 
 
+
 Console.WriteLine("\nVälkommen in!");
+
+
+/*
+
+// Hänvisning till min textfil där användare och password är sparat
+StreamReader sr = new StreamReader("C:\\Users\\krist\\Documents\\GitHub\\Lab2\\Users.txt");
+// Läser första raden
+string line = sr.ReadLine();
+// Läs varje rad tills raden är null
+while (line != null)
+{
+    // Skriv ut raden i filen
+    Console.WriteLine(line);
+    // Läs nästa rad
+    line = sr.ReadLine();
+}
+//Stänger filen
+sr.Close();
+Console.ReadLine();
+
+
+
+//Console.WriteLine("\nVälkommen in!");
+
+*/

@@ -22,8 +22,7 @@ public class Customer
     {
         _CustomerName = name;
         CustomerPassword = password;
-        //List<Customer> CustomerList = new List<Customer>();
-        //CustomerList.Add(new Customer("{_CustomerName}", "{CustomerPassword}"));
+        
     }
 
 
