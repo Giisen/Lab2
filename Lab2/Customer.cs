@@ -16,15 +16,24 @@ public class Customer
         set { _CustomerPassword = value; }
     }
 
-    public bool? logInOk = null;
+    
+    private bool _logInOk;
+    public bool logInOk
 
-    public  TestLogin(bool CustomerNamnOK, string inputPassword)
     {
-        if (CustomerNamnOK==true && CustomerPassword == inputPassword)
+        get { return _logInOk; }
+        set { _logInOk = value; }
+    }
+    
+    public bool TestLogin(bool namn,string password)
+    {
+
+        if (namn == true && password==CustomerPassword)
         {
             logInOk = true;
-            return logInOk;
+            
         }
+        return logInOk;
     }
 
     public Customer(string name, string password)
