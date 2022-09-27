@@ -27,10 +27,11 @@ class Program
 
         // Skapar en lista till vår kundvagn
         List<Cart> CList = new List<Cart>();
+        
 
 
 
-        // Diverse variabler
+            // Diverse variabler
         Customer? currentUser = null;
         bool meny1 = true;
         string inputMeny1 = string.Empty;
@@ -136,6 +137,7 @@ class Program
             }
         }
 
+        Cart currentCart = new Cart("currentUser", 0, 0,0);
 
         while (visaButik)
         {
@@ -166,7 +168,7 @@ class Program
 
                     if (inputHandla == "1")
                     {
-                        CList.Add(new Cart("Midrange disc", 169, inputantal));
+                        CList.Add(new Cart("Midrange disc", 169, inputantal,169));
 
                         Console.WriteLine("Vill du fortsätta handla (j) för ja (n) för nej?");
                         string input = Console.ReadLine().ToLower();
@@ -178,7 +180,7 @@ class Program
 
                     else if (inputHandla == "2")
                     {
-                        CList.Add(new Cart("Bag", 129, inputantal));
+                        CList.Add(new Cart("Bag", 129, inputantal,129));
 
                         Console.WriteLine("Vill du fortsätta handla (j) för ja (n) för nej?");
                         string input = Console.ReadLine().ToLower();
@@ -190,7 +192,7 @@ class Program
                     }
                     else if (inputHandla == "3")
                     {
-                        CList.Add(new Cart("Basket", 999, inputantal));
+                        CList.Add(new Cart("Basket", 999, inputantal, 999));
 
                         Console.WriteLine("Vill du fortsätta handla (j) för ja (n) för nej?");
                         string input = Console.ReadLine().ToLower();
@@ -212,7 +214,7 @@ class Program
                     Console.WriteLine($"Du har lagt följande produkter i varukorgen:");
                     foreach (var prod in CList)
                     {
-                        Console.WriteLine($"{prod.Namn} {prod.Antal} st");
+                        Console.WriteLine($"{prod.Namn} {prod.Antal} st, med ett totalpris:{prod.}");
                     }
 
                     Console.WriteLine("Vill du gå vidare till kassan (j) för ja (n) för nej?");
@@ -231,6 +233,7 @@ class Program
                 else if (inputMeny2 == "3")
                 {
                     Console.WriteLine("Dags att betala...");
+                    Cart.Kassa();
                     Console.ReadLine();
                     visaButik = false;
                     break;

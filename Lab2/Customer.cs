@@ -61,7 +61,7 @@ public class Customer
     // Detta löser inloggningen och ersätter troligen mina listor mm.
 
 
-    //public override string  ToString()
+    //public override string ToString()
     //{
     //    string printInfo = Console.WriteLine($"Ditt namn: {CustomerName} Ditt lösenord är: {CustomerPassword} Din kunvagn består just nu av: ...Kundvagn.....");
     //    return printInfo;

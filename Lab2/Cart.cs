@@ -8,29 +8,32 @@ public class Cart
     public string Namn;
     public decimal Pris;
     public int Antal;
-    public static List<Cart> CList { get; set; }  // Är tvungen att göra den static av någon anledning
+    decimal TotalPris = 0;
+    public  List<Cart> CList { get; set; }  // Är tvungen att göra den static av någon anledning
 
-    public static decimal Kassa()  // Är tvungen att göra den static av någon anledning
+    public  decimal Kassa()  // Är tvungen att göra den static av någon anledning
     {
-        decimal totalPris = 0;
+        
 
-        foreach (var prod in Cart.CList)
+        foreach (var prod in CList) // Denna funkar inte behöver lägga till currentCart eller currentUser
         {
-            totalPris += prod.Pris;
+            TotalPris += prod.Pris;
         }
 
         //CartList.Clear();// Tömmer listan
-        return totalPris;
+        return TotalPris;
     }
 
     
 
-   public Cart(string namn, decimal pris, int antal)
+   public Cart(string namn, decimal pris, int antal,int totalpris)
    {
         Namn=namn;
         Pris = pris;
         Antal = antal;
-    }
+        TotalPris = totalpris;
+
+   }
 
    
 }
