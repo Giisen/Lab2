@@ -1,47 +1,26 @@
 ﻿namespace Lab2;
 
-public class Products : Shop
+public class Products
 {
     private string _Name;
-    public string Name
+    public string ProductName
     {
         get { return _Name; }
         set { _Name = value; }
     }
 
-    private string _ID;
-    public string ID
-    {
-        get { return _ID; }
-        set { _ID = value; }
-    }
-
-
-    private double _Price;
-    public double Price
+    private decimal _Price;
+    public decimal Price
     {
         get { return _Price; }
         set { _Price = value; }
     }
 
-    public Products(string name, double price,int id)
+    public Products(string name, decimal price)
     {
-        Name = name;
+        ProductName = name;
         Price = price;
-        ID = ID;
+        
     }
-
-
-    //public 
-
-
-    //public static void VisaVaror()
-    //{
-    //    foreach (var prod in ProdList)
-    //    {
-    //        Console.WriteLine(prod);
-    //    }
-
-    //}
-
+    
 }

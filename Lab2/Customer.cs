@@ -36,6 +36,16 @@ public class Customer
         return logInOk;
     }
 
+
+    public static void CustomerMeny()
+    {
+        Console.Clear();
+        Console.WriteLine("\nAnvändaren finns inte, vill du skapa en ny användare?\n" +
+                          "1 för att skapa ny användare\n" +
+                          "2 för att försöka logga in igen\n" +
+                          "3 för att stänga programmet.");
+    }
+    
     public Customer(string name, string password)
     {
         _CustomerName = name;
@@ -43,6 +53,7 @@ public class Customer
         
     }
     
+
 
 
     //Skapa en metod med ToString() som gör en sträng av namn och lösenord
