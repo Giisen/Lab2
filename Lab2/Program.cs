@@ -25,7 +25,7 @@ ProdList.Add(new Products("Marker",29,004));
 
 
 // Diverse variabler
-        Customer? currentUser = null; // Sätter currentUser till null.
+        Customer? currentUser = null;
         bool meny1 = true;
         string inputMeny1 = string.Empty;
         bool inlogg = false;
@@ -33,7 +33,7 @@ ProdList.Add(new Products("Marker",29,004));
         bool CustomerPassOk=false;
         
 
-
+// Första menyn (meny1) för att välja ny användare eller logga in befintlig
         Console.WriteLine("\nVälj 1 om du är ny kund och vill skapa en profil\n" +
                           "\nVälj 2 om du redan är kund och vill logga in");
         inputMeny1 = Console.ReadLine();
@@ -126,6 +126,19 @@ ProdList.Add(new Products("Marker",29,004));
                           "1.Handla i shopen\n" +
                           "2.Visa din kundvagn\n" +
                           "3.Gå till kassan");
+
+        string inputMeny2 = Console.ReadLine();
+
+        if (inputMeny2 == "1")
+        {
+            Console.WriteLine("Vi har dessa kanonprodukterna:");
+            foreach (var prod in ProdList)
+            {
+                Console.WriteLine($" {prod.Name} som kostar {prod.Price} st"); 
+                                  
+                  
+            }
+        }
 
 
 

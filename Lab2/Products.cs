@@ -31,4 +31,17 @@ public class Products : Shop
         ID = ID;
     }
 
+
+    //public 
+
+
+    //public static void VisaVaror()
+    //{
+    //    foreach (var prod in ProdList)
+    //    {
+    //        Console.WriteLine(prod);
+    //    }
+
+    //}
+
 }
