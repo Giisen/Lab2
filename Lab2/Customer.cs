@@ -42,20 +42,6 @@ public class Customer
         CustomerPassword = password;
         
     }
-
-
-    //List<Customer> CustomerList = new List<Customer>();
-
-    //Skapar en metod som lägger till Knatte, Fnatte och Tjatte
-    //public void PreCustomer()
-    //{
-    //    //List<Customer> CustomerList = new List<Customer>();
-    //    CustomerList.Add(new Customer("Knatte", "123"));
-    //    CustomerList.Add(new Customer("Fnatte", "321"));
-    //    CustomerList.Add(new Customer("Tjatte", "213"));
-    //}
-
-
     
 
 
@@ -64,22 +50,11 @@ public class Customer
     // Detta löser inloggningen och ersätter troligen mina listor mm.
 
 
-
-
-
-
-    //Skapar en metod som lägger till nya kunder i listan
-    //public NewCustomer(string _CustomerName, string CustomerPassword)
+    //public override string  ToString()
     //{
-    //    //List<Customer> CustomerList = new List<Customer>();
-    //    return CustomerList.Add(new Customer("{_CustomerName}", "{CustomerPassword}"));
+    //    string printInfo = Console.WriteLine($"Ditt namn: {CustomerName} Ditt lösenord är: {CustomerPassword} Din kunvagn består just nu av: ...Kundvagn.....");
+    //    return printInfo;
+        
     //}
-
-
-    public void PrintInfo()
-    {
-        Console.WriteLine($"Ditt namn: {CustomerName} Ditt lösenord är: {CustomerPassword} Din kunvagn består just nu av: ...Kundvagn.....");
-        //return $"Ditt namn: {CustomerName} Ditt lösenord är: {CustomerPassword} Din kunvagn består just nu av: ...Kunvagn.....";
-    }
 }
 

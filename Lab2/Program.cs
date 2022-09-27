@@ -8,8 +8,6 @@ class Program
         Console.WriteLine("Välkomen till butiken -* GIISEN *-\n");
 
 
-
-
 // Skapar en lista med både användarnamn och lösenord
         List<Customer> CustomerList = new List<Customer>();
         CustomerList.Add(new Customer("Knatte", "123"));
@@ -17,22 +15,14 @@ class Program
         CustomerList.Add(new Customer("Tjatte", "213"));
 
 
-/*
-//Skapar en lista med bara användarnamn
-List<string> CustomerNameList = new List<string>();
-CustomerNameList.Add(new string("Knatte"));
-CustomerNameList.Add(new string("Fnatte"));
-CustomerNameList.Add(new string("Tjatte"));
+// Skapar en lista med produkter
+List<Products> ProdList = new List<Products>();
+ProdList.Add(new Products("Midrange disc",169,001));
+ProdList.Add(new Products("Bag",1299,002));
+ProdList.Add(new Products("Basket",999,003));
+ProdList.Add(new Products("Marker",29,004));
 
-//Customer[,] CustomerArray = new Customer[4,2];
-//CustomerArray
 
-//Skapar en lista med bara lösenord
-List<string> CustomerPasswordList = new List<string>();
-CustomerPasswordList.Add(new string("123"));
-CustomerPasswordList.Add(new string("321"));
-CustomerPasswordList.Add(new string("213"));
-*/
 
 // Diverse variabler
         Customer? currentUser = null; // Sätter currentUser till null.
@@ -41,6 +31,7 @@ CustomerPasswordList.Add(new string("213"));
         bool inlogg = false;
         bool CustomerNamnOK=false;
         bool CustomerPassOk=false;
+        
 
 
         Console.WriteLine("\nVälj 1 om du är ny kund och vill skapa en profil\n" +
@@ -118,10 +109,10 @@ CustomerPasswordList.Add(new string("213"));
                     string inputPassword = Console.ReadLine();
 
                     currentUser.TestLogin(CustomerNamnOK, inputPassword);  //Härifrån fattar jag inte!!!
-                    
-                    if (currentUser.logInOk == true)
+
+                    if (currentUser.logInOk)
                     {
-                        CustomerPassOk = true;
+                        CustomerPassOk = true; //Borde kunna tabort denna och bara använda logInOk.....
                     }
 
                 }
@@ -130,12 +121,32 @@ CustomerPasswordList.Add(new string("213"));
 
             }
         }
-
-
-
         Console.WriteLine("\nVälkommen in!");
+        Console.WriteLine("\nVad vill du göra?\n" +
+                          "1.Handla i shopen\n" +
+                          "2.Visa din kundvagn\n" +
+                          "3.Gå till kassan");
+
+
+
+
+
+
+
+
     }
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*   Här nedan kan jag använda en textfil
