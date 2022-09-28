@@ -1,19 +1,19 @@
-﻿using System.Xml;
+﻿
 
 namespace Lab2;
 
-public class Cart
+public class Cart:Products
 
 {
-    public string Namn;
-    public decimal Pris;
+    //public string Namn;
+    //public decimal Pris;
     public int Antal;
-    decimal TotalPris = 0;
+    public decimal TotalPris = 0;
     //public  List<Cart> CList { get; set; }  // Är tvungen att göra den static av någon anledning
 
     //public  decimal Kassa()  // Är tvungen att göra den static av någon anledning
     //{
-        
+
 
     //    foreach (var prod in CList) // Denna funkar inte behöver lägga till currentCart eller currentUser
     //    {
@@ -24,14 +24,24 @@ public class Cart
     //    return TotalPris;
     //}
 
-    
 
-   public Cart(string namn, decimal pris, int antal,int totalpris)
+    private List<Products> _CartList;
+
+    public List<Products> CartList
+    {
+        get { return _CartList; }
+    }
+
+
+
+    public Cart(string namn, decimal pris, int antal, int totalpris) : base()
    {
-        Namn=namn;
-        Pris = pris;
+        ProductName = namn;
+        Price = pris;
         Antal = antal;
+        totalpris = (int)(pris * antal);
         TotalPris = totalpris;
+        
 
    }
 

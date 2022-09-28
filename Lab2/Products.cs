@@ -16,11 +16,30 @@ public class Products
         set { _Price = value; }
     }
 
-    public Products(string name, decimal price)
+    private int _Antal;
+    public int Antal
+    {
+        get { return _Antal; }
+        set { _Antal = value; }
+    }
+
+
+    public Products(string name, decimal price, int antal)
     {
         ProductName = name;
         Price = price;
+        Antal=antal;
         
+
     }
-    
+
+    protected Products()
+    {
+        //throw new NotImplementedException();
+    }
+
+    //protected Products()
+    //{
+    //    //throw new NotImplementedException();
+    //}
 }
