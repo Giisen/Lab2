@@ -9,20 +9,20 @@ public class Cart
     public decimal Pris;
     public int Antal;
     decimal TotalPris = 0;
-    public  List<Cart> CList { get; set; }  // Är tvungen att göra den static av någon anledning
+    //public  List<Cart> CList { get; set; }  // Är tvungen att göra den static av någon anledning
 
-    public  decimal Kassa()  // Är tvungen att göra den static av någon anledning
-    {
+    //public  decimal Kassa()  // Är tvungen att göra den static av någon anledning
+    //{
         
 
-        foreach (var prod in CList) // Denna funkar inte behöver lägga till currentCart eller currentUser
-        {
-            TotalPris += prod.Pris;
-        }
+    //    foreach (var prod in CList) // Denna funkar inte behöver lägga till currentCart eller currentUser
+    //    {
+    //        TotalPris += prod.Pris;
+    //    }
 
-        //CartList.Clear();// Tömmer listan
-        return TotalPris;
-    }
+    //    //CartList.Clear();// Tömmer listan
+    //    return TotalPris;
+    //}
 
     
 

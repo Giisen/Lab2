@@ -6,7 +6,7 @@ public class Customer
     public string CustomerName
     {
         get { return _CustomerName; }
-        
+        private set{}
     }
 
     private string _CustomerPassword;
@@ -45,12 +45,21 @@ public class Customer
                           "2 för att försöka logga in igen\n" +
                           "3 för att stänga programmet.");
     }
-    
+
+
+    private List<Products> _CartList;
+    public List<Products> CartList 
+    {
+        get { return _CartList; }
+    }
+
+
+
     public Customer(string name, string password)
     {
         _CustomerName = name;
         CustomerPassword = password;
-        
+        _CartList = new List<Products>();
     }
     
 
