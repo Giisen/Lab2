@@ -23,23 +23,18 @@ public class Products
         set { _Antal = value; }
     }
 
+    public int TotalPrisEnhet;
 
-    public Products(string name, decimal price, int antal)
+
+    public Products(string name, decimal price, int antal,int totalprisenhet)
     {
         ProductName = name;
         Price = price;
         Antal=antal;
-        
+        totalprisenhet = (int)(price * antal);
+        TotalPrisEnhet = totalprisenhet;
+
 
     }
 
-    protected Products()
-    {
-        //throw new NotImplementedException();
-    }
-
-    //protected Products()
-    //{
-    //    //throw new NotImplementedException();
-    //}
 }

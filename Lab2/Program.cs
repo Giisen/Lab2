@@ -138,7 +138,7 @@ class Program
         }
 
         
-        List<Customer> CartList = new List<Customer>(); //Skapar en kundvagn, kan man få namnet på denna samma som currentUser?
+        List<Products> CartList = new List<Products>(); //Skapar en kundvagn, kan man få namnet på denna samma som currentUser?
 
         while (visaButik)
         {
@@ -169,7 +169,7 @@ class Program
 
                     if (inputHandla == "1")
                     {
-                        CartList.Add(new Customer("Midrange disc", 169, inputantal,169));
+                        CartList.Add(new Products("Midrange disc", 169, inputantal,169));
                         
                         Console.WriteLine("Vill du fortsätta handla (j) för ja (n) för nej?");
                         string input = Console.ReadLine().ToLower();
@@ -181,7 +181,7 @@ class Program
 
                     else if (inputHandla == "2")
                     {
-                        CartList.Add(new Customer("Bag", 999, inputantal,999));
+                        CartList.Add(new Products("Bag", 999, inputantal,999));
 
                         Console.WriteLine("Vill du fortsätta handla (j) för ja (n) för nej?");
                         string input = Console.ReadLine().ToLower();
@@ -193,7 +193,7 @@ class Program
                     }
                     else if (inputHandla == "3")
                     {
-                        CartList.Add(new Customer("Basket", 1999, inputantal,1999));
+                        CartList.Add(new Products("Basket", 1999, inputantal,1999));
                         Console.WriteLine("Vill du fortsätta handla (j) för ja (n) för nej?");
                         string input = Console.ReadLine().ToLower();
                         if (input == "n")

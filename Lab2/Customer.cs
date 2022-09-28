@@ -53,6 +53,8 @@ public class Customer: Products
     }
 
 
+
+  
     private List<Products> _CartList;
 
     public List<Products> CartList
@@ -66,18 +68,18 @@ public class Customer: Products
     {
         _CustomerName = name;
         CustomerPassword = password;
-        
+        _CartList = new List<Products>();
     }
 
-
-    public int TotalPrisEnhet;
-
+    //Försöker fixa en totalkostnad för hela varukorgen
+  
     public int VarukorgKostnad()
     {
         int VarukorgKostnad = TotalPrisEnhet;
         return VarukorgKostnad;
     }
 
+    public int TotalPrisEnhet;
     public Customer(string namn, decimal pris, int antal, int totalprisenhet) : base()
     {
         ProductName = namn;
@@ -85,7 +87,6 @@ public class Customer: Products
         Antal = antal;
         totalprisenhet = (int)(pris * antal);
         TotalPrisEnhet = totalprisenhet;
-
     }
 
 
