@@ -64,7 +64,7 @@ public class Customer: Products
 
 
 
-    public Customer(string name, string password)
+    public Customer(string name, string password)  //Varför måste denna ha en konstruktor i Products?
     {
         _CustomerName = name;
         CustomerPassword = password;
@@ -79,17 +79,7 @@ public class Customer: Products
         return VarukorgKostnad;
     }
 
-    public int TotalPrisEnhet;
-    public Customer(string namn, decimal pris, int antal, int totalprisenhet) : base()
-    {
-        ProductName = namn;
-        Price = pris;
-        Antal = antal;
-        totalprisenhet = (int)(pris * antal);
-        TotalPrisEnhet = totalprisenhet;
-    }
-
-
+   
     //public string ToString()
     //{
 
