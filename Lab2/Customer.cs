@@ -70,16 +70,21 @@ public class Customer: Products
     }
 
 
-    public int TotalPris;
+    public int TotalPrisEnhet;
 
-    public Customer(string namn, decimal pris, int antal, int totalpris) : base()
+    public int VarukorgKostnad()
+    {
+        int VarukorgKostnad = TotalPrisEnhet;
+        return VarukorgKostnad;
+    }
+
+    public Customer(string namn, decimal pris, int antal, int totalprisenhet) : base()
     {
         ProductName = namn;
         Price = pris;
         Antal = antal;
-        totalpris = (int)(pris * antal);
-        TotalPris = totalpris;
-
+        totalprisenhet = (int)(pris * antal);
+        TotalPrisEnhet = totalprisenhet;
 
     }
 

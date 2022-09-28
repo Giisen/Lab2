@@ -213,10 +213,11 @@ class Program
                 {
                     Console.WriteLine($"Du har lagt följande produkter i varukorgen:");
 
+
                     
                     foreach (var prod in CartList)
                     {
-                        Console.WriteLine($"{prod.ProductName} {prod.Antal} st, med ett totalpris: {prod.TotalPris}");
+                        Console.WriteLine($"{prod.ProductName} {prod.Antal} st, med ett totalpris: {prod.TotalPrisEnhet}");
                     }
 
                     
