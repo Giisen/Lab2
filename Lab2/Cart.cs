@@ -5,7 +5,7 @@ using System.Xml.Linq;
 
 namespace Lab2;
 
-public class Cart : Products
+public class Cart
 
 {
     
@@ -36,16 +36,14 @@ public class Cart : Products
 
 
     
-    public Cart(string namn, decimal pris, int antal) : base(namn, pris)
-    {
-        ProduktNamn = namn;
-        Pris = pris;
-        Antal = antal;
-        TotPrisEnhet = (int)(pris * antal);
-        TotPrisKundvagn+=TotalPrisEnhet;
-
-
-    }
+    //public Cart(string namn, decimal pris, int antal) : base(namn, pris)
+    //{
+    //    ProduktNamn = namn;
+    //    Pris = pris;
+    //    Antal = antal;
+    //    TotPrisEnhet = (int)(pris * antal);
+       
+    //}
 
 
 }

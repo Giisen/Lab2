@@ -1,15 +1,16 @@
 ﻿using System.Diagnostics;
+using System.Xml.Linq;
 
 namespace Lab2;
 
 public class Customer
 {
-    private readonly string _CustomerName;
+    private string _CustomerName;
 
     public string CustomerName
     {
         get { return _CustomerName; }
-        private set { }
+        set { _CustomerName = value; }
     }
 
     private string _CustomerPassword;
@@ -52,22 +53,11 @@ public class Customer
                           "3 för att stänga programmet.");
     }
 
+    
 
+    private List<Products> _CartList;
 
-    public  override  string  ToString()
-    {
-        var stringKundvagn= $"{CustomerName}\n";
-        stringKundvagn = $"{CustomerPassword}\n";
-
-        return stringKundvagn;
-    }
-
-
-
-
-    private List<Cart> _CartList;
-
-    public List<Cart> CartList
+    public List<Products> CartList
     {
         get { return _CartList; }
         set { _CartList = value; }
@@ -80,26 +70,36 @@ public class Customer
     {
         _CustomerName = name;
         CustomerPassword = password;
-        _CartList = new List<Cart>();
+        _CartList = new List<Products>();
         
     }
 
-    //Försöker fixa en totalkostnad för hela varukorgen
-  
-    //public int VarukorgKostnad()
-    //{
-    //    int VarukorgKostnad = TotalPrisEnhet;
-    //    return VarukorgKostnad;
-    //}
 
-   
-    //public string ToString()
-    //{
+    public override string ToString()
+    {
+        string stringKundvagn = $"Namn: {CustomerName}\n";
+        stringKundvagn += $"Lösenord: {CustomerPassword}\n";
+        string display = string.Empty;
 
-    //    //string printInfo = CartList; //($"Ditt namn: {CustomerName} Ditt lösenord är: {CustomerPassword} Din kunvagn består just nu av: {CartList}");
-    //    return ToString(CartList);
 
-    //}
+        var distinktLista = CartList.Select(p => p.ProduktNamn).Distinct(); //Tar ut distinkta produktnamn.
+
+        foreach (var prod in distinktLista)
+        {
+            var produkter = CartList.FirstOrDefault(p => p.ProduktNamn == prod);
+            var antalProdukter = CartList.Where(p => p.ProduktNamn == prod).Count();
+            display = $"{produkter}\t {antalProdukter} st {produkter}";
+            Console.WriteLine();
+            stringKundvagn += $"Antal produkter: {antalProdukter}";
+        }
+
+        stringKundvagn += $"Kundvagn:\n{display}\n";
+
+        return stringKundvagn;
+    }
+
+
+
 
 
 }
