@@ -42,4 +42,9 @@ public class Products
     {
         //throw new NotImplementedException();
     }
+
+    public virtual string ToString()
+    {
+        throw new NotImplementedException();
+    }
 }

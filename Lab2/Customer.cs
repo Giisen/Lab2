@@ -52,6 +52,19 @@ public class Customer
                           "3 för att stänga programmet.");
     }
 
+
+
+    public  override  string  ToString()
+    {
+        var stringKundvagn= $"{CustomerName}\n";
+        stringKundvagn = $"{CustomerPassword}\n";
+
+        return stringKundvagn;
+    }
+
+
+
+
     private List<Cart> _CartList;
 
     public List<Cart> CartList
@@ -68,7 +81,7 @@ public class Customer
         _CustomerName = name;
         CustomerPassword = password;
         _CartList = new List<Cart>();
-        //List<Cart> CartList = new List<Cart>();
+        
     }
 
     //Försöker fixa en totalkostnad för hela varukorgen

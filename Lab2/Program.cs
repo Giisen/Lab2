@@ -250,27 +250,10 @@ class Program
                 {
                     Console.WriteLine($"Du har lagt följande produkter i varukorgen:");
 
-                    Console.WriteLine($"{currentUser.CustomerName}....{currentUser.CustomerPassword}..........");
-                    Console.WriteLine();
-                    Console.WriteLine();
-                    Console.WriteLine("Nedan är min foreach loop");
+                    Console.WriteLine("Skriver ut currentUser:");
+                    currentUser.stringKundvagn;
+                    Console.WriteLine(;
                     
-                    foreach (var prod in currentUser.CartList)
-                    {
-                        Console.WriteLine($"{prod.ProduktNamn} {prod.Antal} st, á: {prod.Pris} kr.....totalpris: {prod.TotPrisEnhet * prod.Antal}");
-                    }
-
-                    Console.WriteLine($"Totalkostnad för din beställning är: {currentUser.TotPrisKundvagn}");  // Kommer åt kundvagnens totalrpis via loop, men inte annars.????
-
-                    //var Toti = currentUser.CartList
-                    //    .OrderBy(p => p.ProduktNamn)
-                    //    .Select(p => p.TotPrisKundvagn);
-
-                    //foreach (var kundvagn in Toti)
-                    //{
-                    //    Console.WriteLine($"Totalkostnad för din betällning är:{Toti} ");
-                    //}
-
                     
 
                     Console.WriteLine("Vill du gå vidare till kassan (j) för ja (n) för nej?");
