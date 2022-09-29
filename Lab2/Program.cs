@@ -1,5 +1,8 @@
-﻿using System.ComponentModel.Design;
+﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.IO;
+using System.Xml.Linq;
 using Lab2;
 
 
@@ -20,18 +23,24 @@ class Program
 
         // Skapar en lista med produkter
         List<Products> ProdList = new List<Products>();
-        ProdList.Add(new Products("Midrange disc", 169, 1));
-        ProdList.Add(new Products("Bag", 999, 1));
-        ProdList.Add(new Products("Basket", 1999, 1));
+        ProdList.Add(new Products("Midrange disc", 169));
+        ProdList.Add(new Products("Bag", 999));
+        ProdList.Add(new Products("Basket", 1999));
 
 
         // Skapar en lista till vår kundvagn
         //List<Products> CList = new List<Products>(); //Skapar en kundvagn längre ner
+
+        var disc = new Products("Midrange disc",169);
+        var bag = new Products("Bag", 999);
+        var basket = new Products("Baket", 1999);
+
         
 
 
 
-            // Diverse variabler
+
+        // Diverse variabler
         Customer? currentUser = null;
         bool meny1 = true;
         string inputMeny1 = string.Empty;
@@ -40,6 +49,10 @@ class Program
         bool CustomerPassOk = false;
         bool visaButik = true;
         bool handla = true;
+
+//-----------------------------------------------------------------------------------Meny1----------------------------------------------------------
+
+
 
 
         // Första menyn (meny1) för att välja ny användare eller logga in befintlig
@@ -56,6 +69,7 @@ class Program
                 string newCustomerName = Console.ReadLine();
                 Console.WriteLine("Ange ett lösenord:");
                 string newCustomerPassword = Console.ReadLine();
+                //List<Cart> CartList = new List<Cart>();
 
                 //Lägger till nyKund i CustomerList
                 Customer nyKund = new Customer(newCustomerName, newCustomerPassword);
@@ -71,6 +85,15 @@ class Program
             {
                 Console.WriteLine("Du gjorde ett ogiltigt val, välj 1 eller 2");
             }
+
+            
+
+
+
+//-------------------------------------------------------------Logga in--------------------------------------------------------------
+
+
+
 
 
             while (!inlogg)
@@ -137,8 +160,16 @@ class Program
             }
         }
 
-        
-        List<Products> CartList = new List<Products>(); //Skapar en kundvagn, kan man få namnet på denna samma som currentUser?
+
+
+//--------------------------------------------------------------------Inlogg klar, nu in i butiken---------------------------------------------------------------        
+
+
+
+        //Skapar en kundvagn, kan man få namnet på denna samma som currentUser? Måste denna finnas? Den skapas redan en lista när jag instasierar en kund.
+        //List<Cart> CartList = new List<Cart>();
+        //Cart currentUserCart = new Cart()
+
 
         while (visaButik)
         {
@@ -155,12 +186,13 @@ class Program
                     Console.WriteLine("Vi har dessa kanonprodukter:\n");
                     foreach (var prod in ProdList)
                     {
-                        Console.WriteLine($" {prod.ProductName}--------{prod.Price} kr st");
+                        Console.WriteLine($" {prod.ProduktNamn}--------{prod.Pris} kr st");
                     }
 
+
+                    // Visar produkterna i butiken
                     Shop.Handla();
                     
-
                     string inputHandla = Console.ReadLine();
                     Console.WriteLine("Hur många vill du köpa?");
                     int inputantal = Int32.Parse(Console.ReadLine()); // måste lägga till try() Catch()
@@ -169,8 +201,7 @@ class Program
 
                     if (inputHandla == "1")
                     {
-                        CartList.Add(new Products("Midrange disc", 169, inputantal,169));
-                        
+                        currentUser.CartList.Add(new Cart("Midrange disc", 169, inputantal));
                         Console.WriteLine("Vill du fortsätta handla (j) för ja (n) för nej?");
                         string input = Console.ReadLine().ToLower();
                         if (input == "n")
@@ -181,8 +212,8 @@ class Program
 
                     else if (inputHandla == "2")
                     {
-                        CartList.Add(new Products("Bag", 999, inputantal,999));
-
+                        currentUser.CartList.Add(new Cart("Bag", 999, inputantal));
+                        
                         Console.WriteLine("Vill du fortsätta handla (j) för ja (n) för nej?");
                         string input = Console.ReadLine().ToLower();
                         if (input == "n")
@@ -193,7 +224,7 @@ class Program
                     }
                     else if (inputHandla == "3")
                     {
-                        CartList.Add(new Products("Basket", 1999, inputantal,1999));
+                        currentUser.CartList.Add(new Cart("Basket", 1999, inputantal));
                         Console.WriteLine("Vill du fortsätta handla (j) för ja (n) för nej?");
                         string input = Console.ReadLine().ToLower();
                         if (input == "n")
@@ -209,16 +240,36 @@ class Program
                     }
 
                 }
+
+
+
+//-------------------------------------------------------------Visa kundvagnen---------------------------------------------------
+
+
                 else if (inputMeny2 == "2")
                 {
                     Console.WriteLine($"Du har lagt följande produkter i varukorgen:");
 
-
+                    Console.WriteLine($"{currentUser.CustomerName}....{currentUser.CustomerPassword}..........");
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    Console.WriteLine("Nedan är min foreach loop");
                     
-                    foreach (var prod in CartList)
+                    foreach (var prod in currentUser.CartList)
                     {
-                        Console.WriteLine($"{prod.ProductName} {prod.Antal} st, med ett totalpris: {prod.TotalPrisEnhet}");
+                        Console.WriteLine($"{prod.ProduktNamn} {prod.Antal} st, á: {prod.Pris} kr.....totalpris: {prod.TotPrisEnhet * prod.Antal}");
                     }
+
+                    Console.WriteLine($"Totalkostnad för din beställning är: {currentUser.TotPrisKundvagn}");  // Kommer åt kundvagnens totalrpis via loop, men inte annars.????
+
+                    //var Toti = currentUser.CartList
+                    //    .OrderBy(p => p.ProduktNamn)
+                    //    .Select(p => p.TotPrisKundvagn);
+
+                    //foreach (var kundvagn in Toti)
+                    //{
+                    //    Console.WriteLine($"Totalkostnad för din betällning är:{Toti} ");
+                    //}
 
                     
 
@@ -235,6 +286,13 @@ class Program
                     }
                     
                 }
+
+
+
+//------------------------------------------------------Visa kassan---------------------------------------------------------------
+
+
+
                 else if (inputMeny2 == "3")
                 {
                     Console.WriteLine("Dags att betala...");
@@ -258,8 +316,7 @@ class Program
 
     }
 
-
-
+    
 }
 
 

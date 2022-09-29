@@ -5,16 +5,7 @@ public class Shop
 
     public List<Products> ProductsList { get; set; }
     
-
-
-
-
-
-
-
-
-
-
+    
 
     public static void VisaButik()
     {

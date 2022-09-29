@@ -2,7 +2,7 @@
 
 namespace Lab2;
 
-public class Customer: Products
+public class Customer
 {
     private readonly string _CustomerName;
 
@@ -52,32 +52,32 @@ public class Customer: Products
                           "3 för att stänga programmet.");
     }
 
+    private List<Cart> _CartList;
 
-
-  
-    private List<Products> _CartList;
-
-    public List<Products> CartList
+    public List<Cart> CartList
     {
         get { return _CartList; }
+        set { _CartList = value; }
     }
 
 
 
-    public Customer(string name, string password)  //Varför måste denna ha en konstruktor i Products?
+    public Customer(string name, string password)  //Varför måste denna ha en konstruktor i Products? eller ärva från Products?
+        
     {
         _CustomerName = name;
         CustomerPassword = password;
-        _CartList = new List<Products>();
+        _CartList = new List<Cart>();
+        //List<Cart> CartList = new List<Cart>();
     }
 
     //Försöker fixa en totalkostnad för hela varukorgen
   
-    public int VarukorgKostnad()
-    {
-        int VarukorgKostnad = TotalPrisEnhet;
-        return VarukorgKostnad;
-    }
+    //public int VarukorgKostnad()
+    //{
+    //    int VarukorgKostnad = TotalPrisEnhet;
+    //    return VarukorgKostnad;
+    //}
 
    
     //public string ToString()

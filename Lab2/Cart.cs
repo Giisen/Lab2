@@ -1,14 +1,26 @@
 ﻿
 
+using System.Diagnostics;
+using System.Xml.Linq;
+
 namespace Lab2;
 
-public class Cart:Products
+public class Cart : Products
 
 {
-    //public string Namn;
-    //public decimal Pris;
+    
     public int Antal;
-    public decimal TotalPris = 0;
+    public decimal TotPrisEnhet = 0;
+    public decimal TotPrisKundvagn = 0;
+    
+    //private int _Antal;
+    //public int Antal
+    //{
+    //    get { return _Antal; }
+    //    set { _Antal = value; }
+    //}
+
+
     //public  List<Cart> CList { get; set; }  // Är tvungen att göra den static av någon anledning
 
     //public  decimal Kassa()  // Är tvungen att göra den static av någon anledning
@@ -24,26 +36,39 @@ public class Cart:Products
     //    return TotalPris;
     //}
 
+    // Gör denna något?
+    private List<Cart> _CartList;
 
-    private List<Products> _CartList;
-
-    public List<Products> CartList
+    public List<Cart> CartList
     {
         get { return _CartList; }
     }
 
+    public void ToString()
+    {
+        //string printinfo;
+        //printinfo = string.Join(" ",CartList);
+        Console.WriteLine("Varför funkar inte denna");
+    }
 
 
-    public Cart(string namn, decimal pris, int antal, int totalpris) : base()
-   {
-        ProductName = namn;
-        Price = pris;
+    public Cart() : base()
+    {
+        List<Cart> CartList = new List<Cart>();
+    }
+
+
+    
+    public Cart(string namn, decimal pris, int antal) : base(namn, pris)
+    {
+        ProduktNamn = namn;
+        Pris = pris;
         Antal = antal;
-        totalpris = (int)(pris * antal);
-        TotalPris = totalpris;
-        
+        TotPrisEnhet = (int)(pris * antal);
+        TotPrisKundvagn+=TotalPrisEnhet;
 
-   }
 
-   
+    }
+
+
 }
