@@ -5,14 +5,15 @@ namespace Lab2;
 
 public class Customer
 {
-    private string _CustomerName;
+    private readonly string _CustomerName;
 
     public string CustomerName
     {
-        get { return _CustomerName; }
-        set { _CustomerName = value; }
+        get { return _CustomerName;}
+       
+        
     }
-
+    
     private string _CustomerPassword;
 
     public string CustomerPassword
@@ -30,6 +31,27 @@ public class Customer
         get { return _logInOk; }
         set { _logInOk = value; }
     }
+
+
+    private List<Products> _CartList;
+
+    public List<Products> CartList
+    {
+        get { return _CartList; }
+        set { _CartList = value; }
+    }
+
+
+    public Customer(string name, string password)
+
+    {
+        _CustomerName = name;
+        CustomerPassword = password;
+        _CartList = new List<Products>();
+
+    }
+
+    
 
     public bool TestLogin(bool namn, string password)
     {
@@ -55,29 +77,13 @@ public class Customer
 
     
 
-    private List<Products> _CartList;
-
-    public List<Products> CartList
-    {
-        get { return _CartList; }
-        set { _CartList = value; }
-    }
-
     
-    public Customer(string name, string password) 
-        
-    {
-        _CustomerName = name;
-        CustomerPassword = password;
-        _CartList = new List<Products>();
-         
-    }
 
     // Visar kundvagnen
     public override string ToString()
     {
         Console.Clear();
-        Console.WriteLine($"\n****** Välkommen {CustomerName} till din kundvagn ******\n");
+        Console.WriteLine($"\n****** Välkommen till din kundvagn ******\n");
         //Console.WriteLine($"{CustomerName}");
         string stringKundvagn = $"Namn: {CustomerName}\n";
         stringKundvagn += $"Lösenord: {CustomerPassword}\n\n";
