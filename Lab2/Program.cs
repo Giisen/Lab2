@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.IO;
+using System.Threading.Channels;
 using System.Xml.Linq;
 using Lab2;
 
@@ -27,324 +28,339 @@ class Program
 
         // Diverse variabler
         Customer? currentUser = null;
-        bool meny1 = true;
+        
         string inputMeny1 = string.Empty;
         bool inlogg = false;
         bool CustomerNamnOK = false;
         bool CustomerPassOk = false;
-        bool visaButik = true;
-        bool handla = true;
-
+        bool loggaut = true;
+        
 
         //-----------------------------------------------------------------------------------Meny1----------------------------------------------------------
 
-
-        while (meny1)
+        while (loggaut)
         {
-            Console.Clear();
-            Console.WriteLine("Välkomen till butiken ----***** GIISEN *****----\n" +
-                              "\nVälj 1 om du är ny kund och vill skapa en profil" +
-                              "\nVälj 2 om du redan är kund och vill logga in");
+            bool visaButik = true;
+            bool handla = true;
+            bool meny1 = true;
 
-            inputMeny1 = Console.ReadLine();
-
-
-            if (inputMeny1 == "1")
-            {
-                Console.WriteLine("Ange ett användarnamn:");
-                string newCustomerName = Console.ReadLine();
-                Console.WriteLine("Ange ett lösenord:");
-                string newCustomerPassword = Console.ReadLine();
-                //List<Cart> CartList = new List<Cart>();
-
-                //Lägger till nyKund i CustomerList
-                Customer nyKund = new Customer(newCustomerName, newCustomerPassword);
-                CustomerList.Add(new Customer(newCustomerName, newCustomerPassword));
-                meny1 = false;
-            }
-            else if (inputMeny1 == "2")
-            {
-                meny1 = false;
-            }
-            else
-            {
-                Console.WriteLine("Du gjorde ett ogiltigt val, välj 1 eller 2");
-                Console.ReadLine();
-                continue;
-            }
-
-
-
-
-            //-------------------------------------------------------------Logga in--------------------------------------------------------------
-
-
-
-            while (!inlogg)
+            while (meny1)
             {
                 Console.Clear();
-                Console.WriteLine("Logga in genom att skriva in ditt användarnamn: ");
-                string inputName = Console.ReadLine();
-                foreach (var cust in CustomerList)
+                Console.WriteLine("Välkomen till butiken ----***** GIISEN *****----\n" +
+                                  "\nVälj 1 om du är ny kund och vill skapa en profil" +
+                                  "\nVälj 2 om du redan är kund och vill logga in");
+
+                inputMeny1 = Console.ReadLine();
+
+
+                if (inputMeny1 == "1")
                 {
-                    if (cust.CustomerName == inputName) // Jämför inputname med alla CustomerName i min Customerlista.
-                    {
-                        CustomerNamnOK = true;
-                        currentUser = cust;
-                        inlogg = true;
-                    }
+                    Console.WriteLine("Ange ett användarnamn:");
+                    string newCustomerName = Console.ReadLine();
+                    Console.WriteLine("Ange ett lösenord:");
+                    string newCustomerPassword = Console.ReadLine();
+                    //List<Cart> CartList = new List<Cart>();
+
+                    //Lägger till nyKund i CustomerList
+                    Customer nyKund = new Customer(newCustomerName, newCustomerPassword);
+                    CustomerList.Add(new Customer(newCustomerName, newCustomerPassword));
+                    meny1 = false;
                 }
-
-
-                if (!CustomerNamnOK)
+                else if (inputMeny1 == "2")
                 {
-                    Customer.CustomerMeny();
-
-                    string inputX = Console.ReadLine();
-
-                    if (inputX == "1")
-                    {
-                        meny1 = true;
-                        break;
-
-                    }
-                    else if (inputX == "2")
-                    {
-                        //Här behöver jag stanna kvar i menyn CustomerMeny
-                    }
-                    else if (inputX == "3")
-                    {
-
-                        Environment.Exit(0);
-
-                    }
-                    else
-                    {
-                        Console.WriteLine("Du gjorde ett ogiltigt val, välj 1, 2 eller 3");
-                    }
-
-                }
-
-            }
-        }
-
-
-
-
-        while (!CustomerPassOk && currentUser != null)
-        {
-            Console.WriteLine("Skriv in ditt lösenord:");
-            string inputPassword = Console.ReadLine();
-
-            currentUser.TestLogin(CustomerNamnOK, inputPassword);
-
-            if (currentUser.logInOk)
-            {
-                CustomerPassOk = true; 
-            }
-
-        }
-        
-
-
-
-        //--------------------------------------------------------------------Inlogg klar, nu in i butiken---------------------------------------------------------------        
-
-        
-        while (visaButik)
-        {
-
-            Shop.VisaButik();
-
-            string inputMeny2 = Console.ReadLine();
-
-            while (handla)
-            {
-                if (inputMeny2 == "1")
-                {
-                    Console.Clear();
-                    Console.WriteLine("Vi har dessa kanonprodukter:\n");
-                    foreach (var prod in ProdList)
-                    {
-                        Console.WriteLine($"{prod.ProduktNamn}\t{prod.Pris} kr st");
-                    }
-
-
-                    // Vilka produkter vill du köpa?
-                    Shop.Handla();
-
-                    string inputHandla = Console.ReadLine();
-                    int inputantal = 0;
-
-                    if (inputHandla == "1")
-                    {
-
-                        try
-                        {
-                            Console.WriteLine("Hur många vill du köpa?");
-                            inputantal = Convert.ToInt32(Console.ReadLine());
-                        }
-                        catch (FormatException e)
-                        {
-                            Console.WriteLine("Du kan endast mata in en siffra, var god gör om dina val.");
-
-                        }
-
-                        catch (Exception e)
-                        {
-                            Console.WriteLine("Du har gjort ett ogiltigt val, vänligen mata in en siffra");
-                        }
-
-                        if (inputantal > 0)
-                        {
-                            currentUser.CartList.Add(new Products("Midrange", 169, inputantal));
-                        }
-
-                        Console.WriteLine("Vill du fortsätta handla (j) för ja (n) för nej?");
-                        string input = Console.ReadLine().ToLower();
-                        if (input == "n")
-                        {
-                            break;
-                        }
-                    }
-
-                    else if (inputHandla == "2")
-                    {
-                        try
-                        {
-                            Console.WriteLine("Hur många vill du köpa?");
-                            inputantal = Convert.ToInt32(Console.ReadLine());
-                        }
-                        catch (FormatException e)
-                        {
-                            Console.WriteLine("Du kan endast mata in en siffra, var god gör om dina val.");
-
-                        }
-
-                        catch (Exception e)
-                        {
-                            Console.WriteLine("Du har gjort ett ogiltigt val, vänligen mata in en siffra");
-                        }
-
-
-                        if (inputantal > 0)
-                        {
-                            currentUser.CartList.Add(new Products("Väska   ", 999, inputantal));
-                        }
-
-                        Console.WriteLine("Vill du fortsätta handla (j) för ja (n) för nej?");
-                        string input = Console.ReadLine().ToLower();
-                        if (input == "n")
-                        {
-                            break;
-                        }
-
-                    }
-                    else if (inputHandla == "3")
-                    {
-                        try
-                        {
-                            Console.WriteLine("Hur många vill du köpa?");
-                            inputantal = Convert.ToInt32(Console.ReadLine());
-                        }
-                        catch (FormatException e)
-                        {
-                            Console.WriteLine("Du kan endast mata in en siffra, var god gör om dina val.");
-
-                        }
-
-                        catch (Exception e)
-                        {
-                            Console.WriteLine("Du har gjort ett ogiltigt val, vänligen mata in en siffra");
-                        }
-
-
-                        if (inputantal > 0)
-                        {
-                            currentUser.CartList.Add(new Products("Korg   ", 1999, inputantal));
-                        }
-
-                        Console.WriteLine("Vill du fortsätta handla (j) för ja (n) för nej?");
-                        string input = Console.ReadLine().ToLower();
-                        if (input == "n")
-                        {
-                            break;
-                        }
-
-                    }
-                    else
-                    {
-                        Console.WriteLine(
-                            "Du har gjort ett ogiltigt val, du kan endast bland produkterna som finns i lager, välj en siffra tack.");
-                        Console.ReadLine();
-                    }
-
-                }
-
-
-
-
-                //-------------------------------------------------------------Visa kundvagnen---------------------------------------------------
-
-
-                else if (inputMeny2 == "2")
-                {
-
-                    Console.WriteLine(currentUser);
-                    Console.WriteLine();
-
-
-                    Console.WriteLine("Vill du gå vidare till kassan (j) för ja (n) för nej?");
-                    string inputVarukorg = Console.ReadLine().ToLower();
-                    if (inputVarukorg == "n")
-                    {
-                        visaButik = true;
-                        break;
-                    }
-                    else if (inputVarukorg == "j")
-                    {
-                        inputMeny2 = "3";
-                    }
-                    else
-                    {
-                        Console.WriteLine("Du har gjort ett ogiltigt val, välj 'j' eller 'n'");
-                        Console.ReadLine();
-                        inputMeny2 = "2";
-                    }
-
-                }
-
-
-
-                //------------------------------------------------------Visa kassan---------------------------------------------------------------
-
-
-
-                else if (inputMeny2 == "3")
-                {
-                    Console.WriteLine("\n\nDags att betala...");
-                    Console.WriteLine("Tryck på valfri tangent för att betala");
-                    Console.ReadLine();
-                    Console.Clear();
-                    Console.WriteLine("Tack för din beställning, den skickas inom kort!");
-                    currentUser.CartList.Clear();
-
-                    visaButik = false;
-                    break;
+                    meny1 = false;
                 }
                 else
                 {
-                    Console.WriteLine("Du gjorde ett ogiltigt val, välj '1', '2' eller '3'");
+                    Console.WriteLine("Du gjorde ett ogiltigt val, välj 1 eller 2");
                     Console.ReadLine();
-                    break;
+                    continue;
+                }
 
 
+
+
+                //-------------------------------------------------------------Logga in--------------------------------------------------------------
+
+
+
+                while (!inlogg)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Logga in genom att skriva in ditt användarnamn: ");
+                    string inputName = Console.ReadLine();
+                    foreach (var cust in CustomerList)
+                    {
+                        if (cust.CustomerName ==
+                            inputName) // Jämför inputname med alla CustomerName i min Customerlista.
+                        {
+                            CustomerNamnOK = true;
+                            currentUser = cust;
+                            inlogg = true;
+                        }
+                    }
+
+
+                    if (!CustomerNamnOK)
+                    {
+                        Customer.CustomerMeny();
+
+                        string inputX = Console.ReadLine();
+
+                        if (inputX == "1")
+                        {
+                            meny1 = true;
+                            break;
+
+                        }
+                        else if (inputX == "2")
+                        {
+                            //Här behöver jag stanna kvar i menyn CustomerMeny
+                        }
+                        else if (inputX == "3")
+                        {
+
+                            Environment.Exit(0);
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("Du gjorde ett ogiltigt val, välj 1, 2 eller 3");
+                        }
+
+                    }
 
                 }
             }
+
+
+
+
+            while (!CustomerPassOk && currentUser != null)
+            {
+                Console.WriteLine("Skriv in ditt lösenord:");
+                string inputPassword = Console.ReadLine();
+
+                currentUser.TestLogin(CustomerNamnOK, inputPassword);
+
+                if (currentUser.logInOk)
+                {
+                    CustomerPassOk = true;
+                }
+
+            }
+
+
+
+
+            //--------------------------------------------------------------------Inlogg klar, nu in i butiken---------------------------------------------------------------        
+
+            //visaButik = true;
+            while (visaButik)
+            {
+
+                Shop.VisaButik();
+
+                string inputMeny2 = Console.ReadLine();
+
+                while (handla)
+                {
+                    if (inputMeny2 == "1")
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Vi har dessa kanonprodukter:\n");
+                        foreach (var prod in ProdList)
+                        {
+                            Console.WriteLine($"{prod.ProduktNamn}\t{prod.Pris} kr st");
+                        }
+
+
+                        // Vilka produkter vill du köpa?
+                        Shop.Handla();
+
+                        string inputHandla = Console.ReadLine();
+                        int inputantal = 0;
+
+                        if (inputHandla == "1")
+                        {
+
+                            try
+                            {
+                                Console.WriteLine("Hur många vill du köpa?");
+                                inputantal = Convert.ToInt32(Console.ReadLine());
+                            }
+                            catch (FormatException e)
+                            {
+                                Console.WriteLine("Du kan endast mata in en siffra, var god gör om dina val.");
+
+                            }
+
+                            catch (Exception e)
+                            {
+                                Console.WriteLine("Du har gjort ett ogiltigt val, vänligen mata in en siffra");
+                            }
+
+                            if (inputantal > 0)
+                            {
+                                currentUser.CartList.Add(new Products("Midrange", 169, inputantal));
+                            }
+
+                            Console.WriteLine("Vill du fortsätta handla (j) för ja (n) för nej?");
+                            string input = Console.ReadLine().ToLower();
+                            if (input == "n")
+                            {
+                                break;
+                            }
+                        }
+
+                        else if (inputHandla == "2")
+                        {
+                            try
+                            {
+                                Console.WriteLine("Hur många vill du köpa?");
+                                inputantal = Convert.ToInt32(Console.ReadLine());
+                            }
+                            catch (FormatException e)
+                            {
+                                Console.WriteLine("Du kan endast mata in en siffra, var god gör om dina val.");
+
+                            }
+
+                            catch (Exception e)
+                            {
+                                Console.WriteLine("Du har gjort ett ogiltigt val, vänligen mata in en siffra");
+                            }
+
+
+                            if (inputantal > 0)
+                            {
+                                currentUser.CartList.Add(new Products("Väska   ", 999, inputantal));
+                            }
+
+                            Console.WriteLine("Vill du fortsätta handla (j) för ja (n) för nej?");
+                            string input = Console.ReadLine().ToLower();
+                            if (input == "n")
+                            {
+                                break;
+                            }
+
+                        }
+                        else if (inputHandla == "3")
+                        {
+                            try
+                            {
+                                Console.WriteLine("Hur många vill du köpa?");
+                                inputantal = Convert.ToInt32(Console.ReadLine());
+                            }
+                            catch (FormatException e)
+                            {
+                                Console.WriteLine("Du kan endast mata in en siffra, var god gör om dina val.");
+
+                            }
+
+                            catch (Exception e)
+                            {
+                                Console.WriteLine("Du har gjort ett ogiltigt val, vänligen mata in en siffra");
+                            }
+
+
+                            if (inputantal > 0)
+                            {
+                                currentUser.CartList.Add(new Products("Korg   ", 1999, inputantal));
+                            }
+
+                            Console.WriteLine("Vill du fortsätta handla (j) för ja (n) för nej?");
+                            string input = Console.ReadLine().ToLower();
+                            if (input == "n")
+                            {
+                                break;
+                            }
+
+                        }
+                        else
+                        {
+                            Console.WriteLine(
+                                "Du har gjort ett ogiltigt val, du kan endast bland produkterna som finns i lager, välj en siffra tack.");
+                            Console.ReadLine();
+                        }
+
+                    }
+
+
+
+
+                    //-------------------------------------------------------------Visa kundvagnen---------------------------------------------------
+
+
+                    else if (inputMeny2 == "2")
+                    {
+
+                        Console.WriteLine(currentUser);
+                        Console.WriteLine();
+
+
+                        Console.WriteLine("Vill du gå vidare till kassan (j) för ja (n) för nej?");
+                        string inputVarukorg = Console.ReadLine().ToLower();
+                        if (inputVarukorg == "n")
+                        {
+                            visaButik = true;
+                            break;
+                        }
+                        else if (inputVarukorg == "j")
+                        {
+                            inputMeny2 = "3";
+                        }
+                        else
+                        {
+                            Console.WriteLine("Du har gjort ett ogiltigt val, välj 'j' eller 'n'");
+                            Console.ReadLine();
+                            inputMeny2 = "2";
+                        }
+
+                    }
+
+
+
+                    //------------------------------------------------------Visa kassan---------------------------------------------------------------
+
+
+
+                    else if (inputMeny2 == "3")
+                    {
+                        Console.WriteLine("\n\nDags att betala...");
+                        Console.WriteLine("Tryck på valfri tangent för att betala");
+                        Console.ReadLine();
+                        Console.Clear();
+                        Console.WriteLine("Tack för din beställning, den skickas inom kort!");
+                        currentUser.CartList.Clear();
+                        Environment.Exit(0);
+                        visaButik = false;
+                        break;
+                    }
+                    
+                    //Logga ut användare
+                    else if (inputMeny2 == "4")
+                    {
+                        loggaut=true;
+                        visaButik = false;
+                        handla = false;
+                        break;
+                    }
+                    
+                    else
+                    {
+                        Console.WriteLine("Du gjorde ett ogiltigt val");
+                        Console.ReadLine();
+                        break;
+
+                    }
+                    
+                }
+                
+            }
+            
         }
-
-
     }
 }
 
