@@ -35,11 +35,3 @@ public class Products
         Antal = antal;
     }
 }
-
-// Varför kan jag inte skapa en ny lista i klassen?
-    // Skapar en lista med produkter
-//    public List<Products> ProdList { get; } = new();
-//    ProdList.Add(new Products("Midrange disc", 169));
-//    ProdList.Add(new Products("Bag", 999));
-//    ProdList.Add(new Products("Basket", 1999));
-//}

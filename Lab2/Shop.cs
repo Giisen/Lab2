@@ -21,9 +21,9 @@ public class Shop
     {
 
         Console.WriteLine("\nVilken produkt vill du köpa?\n" +
-                          "1. Midrange disc\n" +
-                          "2. Bag\n" +
-                          "3. Basket\n");
+                          "1. Midrange\n" +
+                          "2. Väska\n" +
+                          "3. Korg\n");
                           
     }
 }

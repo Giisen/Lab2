@@ -63,37 +63,57 @@ public class Customer
         set { _CartList = value; }
     }
 
-
-
-    public Customer(string name, string password)  //Varför måste denna ha en konstruktor i Products? eller ärva från Products?
+    
+    public Customer(string name, string password) 
         
     {
         _CustomerName = name;
         CustomerPassword = password;
         _CartList = new List<Products>();
-        
+         
     }
 
-
+    // Visar kundvagnen
     public override string ToString()
     {
+        Console.Clear();
+        Console.WriteLine($"\n****** Välkommen {CustomerName} till din kundvagn ******\n");
+        //Console.WriteLine($"{CustomerName}");
         string stringKundvagn = $"Namn: {CustomerName}\n";
-        stringKundvagn += $"Lösenord: {CustomerPassword}\n";
+        stringKundvagn += $"Lösenord: {CustomerPassword}\n\n";
         string display = string.Empty;
-
+        int summa = 0;
+        int totalsumma = 0;
 
         var distinktLista = CartList.Select(p => p.ProduktNamn).Distinct(); //Tar ut distinkta produktnamn.
 
-        foreach (var prod in distinktLista)
+        //var nyLista = from cart in CartList select cart;
+        stringKundvagn+=("\nProdukter:\n");
+        foreach (var prod in CartList)
         {
-            var produkter = CartList.FirstOrDefault(p => p.ProduktNamn == prod);
-            var antalProdukter = CartList.Where(p => p.ProduktNamn == prod).Count();
-            display = $"{produkter}\t {antalProdukter} st {produkter}";
-            Console.WriteLine();
-            stringKundvagn += $"Antal produkter: {antalProdukter}";
-        }
+            //var antalProdukter = distinktLista.Where(p => p. == prod).Count();
+            //var produkter = distinktLista.FirstOrDefault(p => p.ProduktNamn == prod);
+            //var pris = distinktLista.FirstOrDefault(x => x.Pris == prod);
+            ////var prods = prod.ProduktNamn;
+            //display = $"{produkter}\t {antalProdukter} st {produkter}";
+            //Console.WriteLine("Nedan skirver ut alla prod");
+            //Console.WriteLine(prod);
+            //Console.WriteLine("bryter rad och skriver ut produkter");
+            //Console.WriteLine(produkter);
+            
+            summa = (prod.Pris * prod.Antal);
+            stringKundvagn += $"{prod.ProduktNamn} \t{prod.Pris} per st\tantal: {prod.Antal}\ttotalpris: {summa} kr\n";
 
-        stringKundvagn += $"Kundvagn:\n{display}\n";
+            totalsumma += summa;
+
+            //Console.WriteLine($"Produkterna är: {prods}");
+
+            //Console.WriteLine($"Priset är {pris}");
+
+        }
+        stringKundvagn += $"\nSumman av din kundvagn: {totalsumma} kr";
+
+        //stringKundvagn += $"Kundvagn:\n{display}\n";
 
         return stringKundvagn;
     }
