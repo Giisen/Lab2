@@ -25,15 +25,6 @@ class Program
         ProdList.Add(new Products("Väska", 999, 1));
         ProdList.Add(new Products("korg", 1999, 1));
 
-
-        // Skapar en lista till vår kundvagn
-        //List<Products> CList = new List<Products>(); //Skapar en kundvagn längre ner
-
-        //var disc = new Products("Midrange disc",169);
-        //var bag = new Products("Bag", 999);
-        //var basket = new Products("Baket", 1999);
-
-
         // Diverse variabler
         Customer? currentUser = null;
         bool meny1 = true;
@@ -159,13 +150,7 @@ class Program
 
         //--------------------------------------------------------------------Inlogg klar, nu in i butiken---------------------------------------------------------------        
 
-
-
-        //Skapar en kundvagn, kan man få namnet på denna samma som currentUser? Måste denna finnas? Den skapas redan en lista när jag instasierar en kund.
-        //List<Cart> CartList = new List<Cart>();
-        //Cart currentUserCart = new Cart()
-
-
+        
         while (visaButik)
         {
 

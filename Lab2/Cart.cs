@@ -5,13 +5,10 @@ using System.Xml.Linq;
 
 namespace Lab2;
 
-public class Cart
+public class Cart //Denna används inte
 
 {
 
-    public List<Products> Products { get; set; }
-
-
-
-
+    //public List<Products> Products { get; set; }
+    
 }

@@ -91,7 +91,7 @@ public class Customer
         int summa = 0;
         int totalsumma = 0;
 
-        var distinktLista = CartList.Select(p => p.ProduktNamn).Distinct(); //Tar ut distinkta produktnamn.
+        //var distinktLista = CartList.Select(p => p.ProduktNamn).Distinct(); //Tar ut distinkta produktnamn.
 
         //var nyLista = from cart in CartList select cart;
         stringKundvagn+=("\nProdukter:\n");
