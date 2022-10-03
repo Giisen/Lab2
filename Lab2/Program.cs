@@ -342,9 +342,12 @@ class Program
                     //Logga ut användare
                     else if (inputMeny2 == "4")
                     {
-                        loggaut=true;
+                        inlogg = false;
+                        CustomerPassOk = false;
+                        //CustomerNamnOK = false;
+                        //loggaut =true;
                         visaButik = false;
-                        handla = false;
+                        //handla = false;
                         break;
                     }
                     
