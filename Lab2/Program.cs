@@ -23,12 +23,11 @@ class Program
         // Skapar en lista med produkter
         List<Products> ProdList = new List<Products>();
         ProdList.Add(new Products("Midrange", 169, 1));
-        ProdList.Add(new Products("Väska", 999, 1));
-        ProdList.Add(new Products("korg", 1999, 1));
+        ProdList.Add(new Products("Väska   ", 999, 1));
+        ProdList.Add(new Products("korg    ", 1999, 1));
 
         // Diverse variabler
         Customer? currentUser = null;
-        
         string inputMeny1 = string.Empty;
         bool inlogg = false;
         bool CustomerNamnOK = false;
@@ -92,8 +91,7 @@ class Program
                     string inputName = Console.ReadLine();
                     foreach (var cust in CustomerList)
                     {
-                        if (cust.CustomerName ==
-                            inputName) // Jämför inputname med alla CustomerName i min Customerlista.
+                        if (cust.CustomerName == inputName) // Jämför inputname med alla CustomerName i min Customerlista.
                         {
                             CustomerNamnOK = true;
                             currentUser = cust;
@@ -163,7 +161,7 @@ class Program
                 Shop.VisaButik();
 
                 string inputMeny2 = Console.ReadLine();
-
+                
                 while (handla)
                 {
                     if (inputMeny2 == "1")
@@ -347,7 +345,7 @@ class Program
                     {
                         inlogg = false;
                         CustomerPassOk = false;
-                        //CustomerNamnOK = false;
+                        CustomerNamnOK = false;
                         //loggaut =true;
                         visaButik = false;
                         //handla = false;

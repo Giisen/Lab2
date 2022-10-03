@@ -1,11 +1,20 @@
 ﻿namespace Lab2;
 
-public abstract class Shop
+public record /*abstract class*/ Shop
 {
 
-    public List<Products> ProductsList { get; set; } // Denna tror jag inte används
-    
-    
+    //public List<Products> ProdList { get; set; } // Denna tror jag inte används
+
+
+    //// Skapar en lista med produkter
+    //List<Products> ProdList = new List<Products>();
+    //ProdList.Add(new Products("Midrange", 169, 1));
+    //ProdList.Add(new Products("Väska", 999, 1));
+    //ProdList.Add(new Products("korg", 1999, 1));
+
+
+
+
 
     public static void VisaButik()
     {
@@ -23,7 +32,7 @@ public abstract class Shop
 
         Console.WriteLine("\nVilken produkt vill du köpa?\n" +
                           "1. Midrange\n" +
-                          "2. Väska\n" +
+                          "2. Väska   \n" +
                           "3. Korg\n");
                           
     }
