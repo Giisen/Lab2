@@ -75,9 +75,19 @@ public class Customer
                           "3 för att stänga programmet.");
     }
 
-    
+    //Metod för totalsumman för kundvagnen
+    public int KundvagnTotal()
+    {
+        int totalsumma = 0;
+        int summa=0;
+        foreach (var prod in CartList)
+        {
+            summa = (prod.Pris * prod.Antal);
+            totalsumma += summa;
+        }
+        return totalsumma;
+    }
 
-    
 
     // Visar kundvagnen
     public override string ToString()
@@ -87,7 +97,7 @@ public class Customer
         //Console.WriteLine($"{CustomerName}");
         string stringKundvagn = $"Namn: {CustomerName}\n";
         stringKundvagn += $"Lösenord: {CustomerPassword}\n\n";
-        string display = string.Empty;
+        //string display = string.Empty;
         int summa = 0;
         int totalsumma = 0;
 
@@ -117,7 +127,8 @@ public class Customer
             //Console.WriteLine($"Priset är {pris}");
 
         }
-        stringKundvagn += $"\nSumman av din kundvagn: {totalsumma} kr";
+        //stringKundvagn += $"\nSumman av din kundvagn: {totalsumma} kr";
+        stringKundvagn += $"\nSumman av din kundvagn: {KundvagnTotal()} kr";
 
         //stringKundvagn += $"Kundvagn:\n{display}\n";
 

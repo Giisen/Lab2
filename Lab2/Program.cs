@@ -156,7 +156,7 @@ class Program
 
             //--------------------------------------------------------------------Inlogg klar, nu in i butiken---------------------------------------------------------------        
 
-            //visaButik = true;
+            
             while (visaButik)
             {
 
@@ -298,6 +298,9 @@ class Program
 
                         Console.WriteLine(currentUser);
                         Console.WriteLine();
+                        //Console.WriteLine($"Nu med metoden för totalsumman {currentUser.KundvagnTotal()}");
+                        
+
 
 
                         Console.WriteLine("Vill du gå vidare till kassan (j) för ja (n) för nej?");
