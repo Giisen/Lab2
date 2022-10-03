@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System.Data.Common;
+using System.Diagnostics;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
 namespace Lab2;
@@ -94,6 +96,43 @@ public class Customer
     {
         Console.Clear();
         Console.WriteLine($"\n****** Välkommen till din kundvagn ******\n");
+        
+        string stringKundvagn = $"Namn: {CustomerName}\n";
+        stringKundvagn += $"Lösenord: {CustomerPassword}\n\n";
+        
+        //int summa = 0;
+        //int totalsumma = 0;
+        var antProd = 0;
+        //int pris=0;
+        var distinktLista = CartList.Select(p => p.ProduktNamn).Distinct(); //Tar ut distinkta produktnamn.
+        
+        
+        stringKundvagn+=("\nProdukter:\n");
+        foreach (var prod in distinktLista)
+        {
+            var produkter = CartList.FirstOrDefault(p => p.ProduktNamn == prod);
+            antProd = CartList.Where(p => p.ProduktNamn == prod).Sum(p=>p.Antal);
+            int totalpris = antProd * produkter.Pris;
+            stringKundvagn += ($"\n{produkter.ProduktNamn}\t antal: {antProd} st\t summa: {totalpris} kr");
+            
+            //totalsumma += summa;
+            
+        }
+
+
+        stringKundvagn += $"\n\n\t\tSumman av din kundvagn: {KundvagnTotal()} kr";
+        
+
+        return stringKundvagn;
+    }
+
+    /*
+      Fungerande kod för kundvagnen
+    // Visar kundvagnen
+    public override string ToString()
+    {
+        Console.Clear();
+        Console.WriteLine($"\n****** Välkommen till din kundvagn ******\n");
         //Console.WriteLine($"{CustomerName}");
         string stringKundvagn = $"Namn: {CustomerName}\n";
         stringKundvagn += $"Lösenord: {CustomerPassword}\n\n";
@@ -134,7 +173,8 @@ public class Customer
 
         return stringKundvagn;
     }
-
+    
+     */
 
 
 

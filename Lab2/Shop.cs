@@ -1,6 +1,6 @@
 ﻿namespace Lab2;
 
-public record /*abstract class*/ Shop
+public abstract class  Shop
 {
 
     //public List<Products> ProdList { get; set; } // Denna tror jag inte används
