@@ -14,7 +14,7 @@ class Program
 
         // Skapar en lista med både användarnamn och lösenord
         List<Customer> CustomerList = new List<Customer>();
-        CustomerList.Add(new Customer("k", "l")); //Ta bort denna vid inlämning
+        CustomerList.Add(new Customer("k", "l"));
         CustomerList.Add(new Customer("Knatte", "123"));
         CustomerList.Add(new Customer("Fnatte", "321"));
         CustomerList.Add(new Customer("Tjatte", "213"));
@@ -24,7 +24,7 @@ class Program
         List<Products> ProdList = new List<Products>();
         ProdList.Add(new Products("Midrange", 169, 1));
         ProdList.Add(new Products("Väska   ", 999, 1));
-        ProdList.Add(new Products("korg    ", 1999, 1));
+        ProdList.Add(new Products("Korg    ", 1999, 1));
 
         // Diverse variabler
         Customer? currentUser = null;
@@ -35,7 +35,7 @@ class Program
         bool loggaut = true;
         
 
-        //-----------------------------------------------------------------------------------Meny1----------------------------------------------------------
+        //----------------------------------------------Meny1----------------------------------------------------------
 
         while (loggaut)
         {
@@ -59,7 +59,7 @@ class Program
                     string newCustomerName = Console.ReadLine();
                     Console.WriteLine("Ange ett lösenord:");
                     string newCustomerPassword = Console.ReadLine();
-                    //List<Cart> CartList = new List<Cart>();
+                    
 
                     //Lägger till nyKund i CustomerList
                     Customer nyKund = new Customer(newCustomerName, newCustomerPassword);
@@ -80,7 +80,7 @@ class Program
 
 
 
-                //-------------------------------------------------------------Logga in--------------------------------------------------------------
+                //----------------------------------------------Logga in--------------------------------------------------------------
 
 
 
@@ -114,7 +114,7 @@ class Program
                         }
                         else if (inputX == "2")
                         {
-                            //Här behöver jag stanna kvar i menyn CustomerMeny
+                            
                         }
                         else if (inputX == "3")
                         {
@@ -146,13 +146,17 @@ class Program
                 {
                     CustomerPassOk = true;
                 }
+                else
+                {
+                    Console.WriteLine("Lösenordet är fel, var god försök igen.");
+                }
 
             }
 
 
 
 
-            //--------------------------------------------------------------------Inlogg klar, nu in i butiken---------------------------------------------------------------        
+            //----------------------------------------------Inlogg klar, nu in i butiken---------------------------------------------------------------        
 
             
             while (visaButik)
@@ -265,7 +269,7 @@ class Program
 
                             if (inputantal > 0)
                             {
-                                currentUser.CartList.Add(new Products("Korg   ", 1999, inputantal));
+                                currentUser.CartList.Add(new Products("Korg     ", 1999, inputantal));
                             }
 
                             Console.WriteLine("Vill du fortsätta handla (j) för ja (n) för nej?");
@@ -288,20 +292,15 @@ class Program
 
 
 
-                    //-------------------------------------------------------------Visa kundvagnen---------------------------------------------------
+                    //------------------------------------------------Visa kundvagnen---------------------------------------------------
 
 
                     else if (inputMeny2 == "2")
                     {
 
                         Console.WriteLine(currentUser);
-                        Console.WriteLine();
-                        //Console.WriteLine($"Nu med metoden för totalsumman {currentUser.KundvagnTotal()}");
                         
-
-
-
-                        Console.WriteLine("Vill du gå vidare till kassan (j) för ja (n) för nej?");
+                        Console.WriteLine("\nVill du gå vidare till kassan (j) för ja (n) för nej?");
                         string inputVarukorg = Console.ReadLine().ToLower();
                         if (inputVarukorg == "n")
                         {
@@ -314,7 +313,7 @@ class Program
                         }
                         else
                         {
-                            Console.WriteLine("Du har gjort ett ogiltigt val, välj 'j' eller 'n'");
+                            Console.WriteLine("\nDu har gjort ett ogiltigt val, välj 'j' eller 'n'");
                             Console.ReadLine();
                             inputMeny2 = "2";
                         }
@@ -323,7 +322,7 @@ class Program
 
 
 
-                    //------------------------------------------------------Visa kassan---------------------------------------------------------------
+                    //---------------------------------------------Visa kassan---------------------------------------------------------------
 
 
 
@@ -346,9 +345,7 @@ class Program
                         inlogg = false;
                         CustomerPassOk = false;
                         CustomerNamnOK = false;
-                        //loggaut =true;
                         visaButik = false;
-                        //handla = false;
                         break;
                     }
                     

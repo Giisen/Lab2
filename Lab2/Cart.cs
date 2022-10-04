@@ -9,6 +9,6 @@ public class Cart //Denna används inte
 
 {
 
-    //public List<Products> Products { get; set; }
+    
     
 }

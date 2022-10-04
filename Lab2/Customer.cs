@@ -72,9 +72,9 @@ public class Customer
     {
         Console.Clear();
         Console.WriteLine("\nAnvändaren finns inte, vill du skapa en ny användare?\n" +
-                          "1 för att skapa ny användare\n" +
-                          "2 för att försöka logga in igen\n" +
-                          "3 för att stänga programmet.");
+                          "1. för att skapa ny användare\n" +
+                          "2. för att försöka logga in igen\n" +
+                          "3. för att stänga programmet.");
     }
 
     //Metod för totalsumman för kundvagnen
@@ -99,13 +99,9 @@ public class Customer
         
         string stringKundvagn = $"Namn: {CustomerName}\n";
         stringKundvagn += $"Lösenord: {CustomerPassword}\n\n";
-        
-        //int summa = 0;
-        //int totalsumma = 0;
+       
         var antProd = 0;
-        //int pris=0;
         var distinktLista = CartList.Select(p => p.ProduktNamn).Distinct(); //Tar ut distinkta produktnamn.
-        
         
         stringKundvagn+=("\nProdukter:\n");
         foreach (var prod in distinktLista)
@@ -113,70 +109,11 @@ public class Customer
             var produkter = CartList.FirstOrDefault(p => p.ProduktNamn == prod);
             antProd = CartList.Where(p => p.ProduktNamn == prod).Sum(p=>p.Antal);
             int totalpris = antProd * produkter.Pris;
-            stringKundvagn += ($"\n{produkter.ProduktNamn}\t antal: {antProd} st\t summa: {totalpris} kr");
-            
-            //totalsumma += summa;
-            
+            stringKundvagn += ($"\n{produkter.ProduktNamn}\t antal: {antProd} st\t styckpris: {produkter.Pris} kr\tsumma: {totalpris} kr");
         }
-
-
-        stringKundvagn += $"\n\n\t\tSumman av din kundvagn: {KundvagnTotal()} kr";
         
-
+        stringKundvagn += $"\n\nSumman av din kundvagn: {KundvagnTotal()} kr";
+        
         return stringKundvagn;
     }
-
-    /*
-      Fungerande kod för kundvagnen
-    // Visar kundvagnen
-    public override string ToString()
-    {
-        Console.Clear();
-        Console.WriteLine($"\n****** Välkommen till din kundvagn ******\n");
-        //Console.WriteLine($"{CustomerName}");
-        string stringKundvagn = $"Namn: {CustomerName}\n";
-        stringKundvagn += $"Lösenord: {CustomerPassword}\n\n";
-        //string display = string.Empty;
-        int summa = 0;
-        int totalsumma = 0;
-
-        //var distinktLista = CartList.Select(p => p.ProduktNamn).Distinct(); //Tar ut distinkta produktnamn.
-
-        //var nyLista = from cart in CartList select cart;
-        stringKundvagn+=("\nProdukter:\n");
-        foreach (var prod in CartList)
-        {
-            //var antalProdukter = distinktLista.Where(p => p. == prod).Count();
-            //var produkter = distinktLista.FirstOrDefault(p => p.ProduktNamn == prod);
-            //var pris = distinktLista.FirstOrDefault(x => x.Pris == prod);
-            ////var prods = prod.ProduktNamn;
-            //display = $"{produkter}\t {antalProdukter} st {produkter}";
-            //Console.WriteLine("Nedan skirver ut alla prod");
-            //Console.WriteLine(prod);
-            //Console.WriteLine("bryter rad och skriver ut produkter");
-            //Console.WriteLine(produkter);
-            
-            summa = (prod.Pris * prod.Antal);
-            stringKundvagn += $"{prod.ProduktNamn} \t{prod.Pris} per st\tantal: {prod.Antal}\ttotalpris: {summa} kr\n";
-
-            totalsumma += summa;
-
-            //Console.WriteLine($"Produkterna är: {prods}");
-
-            //Console.WriteLine($"Priset är {pris}");
-
-        }
-        //stringKundvagn += $"\nSumman av din kundvagn: {totalsumma} kr";
-        stringKundvagn += $"\nSumman av din kundvagn: {KundvagnTotal()} kr";
-
-        //stringKundvagn += $"Kundvagn:\n{display}\n";
-
-        return stringKundvagn;
-    }
-    
-     */
-
-
-
-
 }
