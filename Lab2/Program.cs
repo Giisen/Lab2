@@ -14,10 +14,10 @@ class Program
 
         // Skapar en lista med både användarnamn och lösenord
         List<Customer> CustomerList = new List<Customer>();
-        CustomerList.Add(new Customer("k", "l"));
-        CustomerList.Add(new Customer("Knatte", "123"));
+        CustomerList.Add(new Bronze("k", "l"));
+        CustomerList.Add(new Silver("Knatte", "123"));
         CustomerList.Add(new Customer("Fnatte", "321"));
-        CustomerList.Add(new Customer("Tjatte", "213"));
+        CustomerList.Add(new Gold("Tjatte", "213"));
 
 
         // Skapar en lista med produkter
@@ -59,11 +59,46 @@ class Program
                     string newCustomerName = Console.ReadLine();
                     Console.WriteLine("Ange ett lösenord:");
                     string newCustomerPassword = Console.ReadLine();
-                    
+                    Console.WriteLine("Välj din rabattnivå :-) :\n" +
+                                      "1. Basic, ingen rabatt\n" +
+                                      "2. Bronze, 5% rabatt\n" +
+                                      "3. Silver, 10% rabatt\n" +
+                                      "4. Gold, 15% rabatt");
+                    string inputRabatt = Console.ReadLine();
 
-                    //Lägger till nyKund i CustomerList
-                    Customer nyKund = new Customer(newCustomerName, newCustomerPassword);
-                    CustomerList.Add(new Customer(newCustomerName, newCustomerPassword));
+                    switch (inputRabatt)
+                    {
+                        case "1":
+                        {
+                            CustomerList.Add(new Customer(newCustomerName, newCustomerPassword));
+                            break;
+                        }
+                        case "2":
+                        {
+                            CustomerList.Add(new Bronze(newCustomerName, newCustomerPassword));
+                                break;
+                        }
+                        case "3":
+                        {
+                            CustomerList.Add(new Silver(newCustomerName, newCustomerPassword));
+                            break;
+                        }
+                        case "4":
+                        {
+                            CustomerList.Add(new Gold(newCustomerName, newCustomerPassword));
+                            break;
+                        }
+                        default:
+                        {
+                            Console.WriteLine("Du har gjort ett ogiltigt val, vänligen välj rabatt");
+                            Console.ReadKey();
+                            break;
+                        }
+                    }
+
+
+                    //Lägger till kund i CustomerList
+                    //CustomerList.Add(new Customer(newCustomerName, newCustomerPassword));
                     meny1 = false;
                 }
                 else if (inputMeny1 == "2")
@@ -82,7 +117,7 @@ class Program
 
                 //----------------------------------------------Logga in--------------------------------------------------------------
 
-
+                
 
                 while (!inlogg)
                 {
@@ -293,13 +328,15 @@ class Program
 
 
                     //------------------------------------------------Visa kundvagnen---------------------------------------------------
-
+                    
 
                     else if (inputMeny2 == "2")
                     {
 
-                        Console.WriteLine(currentUser);
                         
+
+                        Console.WriteLine(currentUser);
+
                         Console.WriteLine("\nVill du gå vidare till kassan (j) för ja (n) för nej?");
                         string inputVarukorg = Console.ReadLine().ToLower();
                         if (inputVarukorg == "n")
@@ -364,42 +401,4 @@ class Program
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*   Här nedan kan jag använda en textfil
-
-// Hänvisning till min textfil där användare och password är sparat
-StreamReader sr = new StreamReader("C:\\Users\\krist\\Documents\\GitHub\\Lab2\\Users.txt");
-// Läser första raden
-string line = sr.ReadLine();
-// Läs varje rad tills raden är null
-while (line != null)
-{
-    // Skriv ut raden i filen
-    Console.WriteLine(line);
-    // Läs nästa rad
-    line = sr.ReadLine();
-}
-//Stänger filen
-sr.Close();
-Console.ReadLine();
-
-
-
-//Console.WriteLine("\nVälkommen in!");
-
-*/
-
 
