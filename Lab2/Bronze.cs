@@ -5,6 +5,6 @@ public class Bronze : Customer
 
     public Bronze(string name, string password) : base(name, password)
     {
-        Rabatt = 0.95F;
+        Rabatt = (decimal)0.95;
     }
 }

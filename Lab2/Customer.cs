@@ -35,9 +35,9 @@ public class Customer
         set { _logInOk = value; }
     }
 
-    private float _Rabatt;
+    private decimal _Rabatt;
 
-    public float Rabatt
+    public decimal Rabatt
     {
         get { return _Rabatt; }
         set { _Rabatt = value; }
@@ -59,7 +59,7 @@ public class Customer
         _CustomerName = name;
         CustomerPassword = password;
         _CartList = new List<Products>();
-        Rabatt = 1.0F;
+        Rabatt = (decimal)1.0;
     }
 
 
@@ -86,7 +86,7 @@ public class Customer
                           "3. för att stänga programmet.");
     }
 
-    public virtual double Discount()
+    public virtual decimal Discount()
     {
         return Rabatt;
     }
@@ -133,7 +133,7 @@ public class Customer
 
 
         stringKundvagn += $"\n\nSumman av din kundvagn: {KundvagnTotal()} kr";
-        stringKundvagn += $"\nRabatt:"+ Math.Floor((1.0F-Rabatt) *100)+"%";
+        stringKundvagn += $"\nRabatt:"+ Math.Floor((1.0-(double)Rabatt) *100)+"%";
         stringKundvagn += $"\nAtt betala: {Math.Floor(KundvagnTotal()*Rabatt)} kr";
 
         return stringKundvagn;
