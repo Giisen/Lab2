@@ -12,14 +12,6 @@ class Program
     public static void Main(string[] args)
     {
 
-        // Skapar en lista med både användarnamn och lösenord
-        List<Customer> CustomerList = new List<Customer>();
-        CustomerList.Add(new Bronze("k", "l"));
-        CustomerList.Add(new Silver("Knatte", "123"));
-        CustomerList.Add(new Customer("Fnatte", "321"));
-        CustomerList.Add(new Gold("Tjatte", "213"));
-
-
         // Skapar en lista med produkter
         List<Products> ProdList = new List<Products>();
         ProdList.Add(new Products("Midrange", 169, 1));
@@ -33,7 +25,75 @@ class Program
         bool CustomerNamnOK = false;
         bool CustomerPassOk = false;
         bool loggaut = true;
-        
+
+
+        List<Customer> CustomerList = new List<Customer>();
+
+        //Skapar en lista med både användarnamn och lösenord
+        //CustomerList.Add(new Bronze("k", "l"));
+        //CustomerList.Add(new Silver("Knatte", "123"));
+        //CustomerList.Add(new Customer("Fnatte", "321"));
+        //CustomerList.Add(new Gold("Tjatte", "213"));
+
+
+        var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        var file = Path.Combine(desktop,"KristerUsers.txt");
+        if (File.Exists(file))
+        {
+            using (StreamReader sr = new StreamReader(file))
+            {
+                var line = sr.ReadLine();
+               
+
+                while (line != null)
+                {
+                    var split = line.Split(',');
+                    string discount = split[0];
+                    string userName = split[1];
+                    string passw = split[2];
+                    
+
+
+                    if (discount =="Basic")
+                    {
+                        CustomerList.Add(new Customer($"{userName}", $"{passw}"));
+
+
+                    }
+                    
+                    if (discount == "Bronze")
+                    {
+                        CustomerList.Add(new Bronze($"{userName}", $"{passw}"));
+                        
+                    }
+                    
+                    if (discount == "Silver")
+                    {
+                        CustomerList.Add(new Silver($"{userName}", $"{passw}"));
+                       
+                    }
+                    
+                    if (discount == "Gold")
+                    {
+                        CustomerList.Add(new Gold($"{userName}", $"{passw}"));
+                        
+                    }
+                    line = sr.ReadLine();
+
+                }
+            }
+        }
+        else
+        {
+            //Skapar en lista med både användarnamn och lösenord
+            CustomerList.Add(new Bronze("k", "l"));
+            CustomerList.Add(new Silver("Knatte", "123"));
+            CustomerList.Add(new Customer("Fnatte", "321"));
+            CustomerList.Add(new Gold("Tjatte", "213"));
+        }
+
+
+
 
         //----------------------------------------------Meny1----------------------------------------------------------
 
@@ -60,45 +120,39 @@ class Program
                     Console.WriteLine("Ange ett lösenord:");
                     string newCustomerPassword = Console.ReadLine();
                     Console.WriteLine("Välj din rabattnivå :-) :\n" +
-                                      "1. Basic, ingen rabatt\n" +
-                                      "2. Bronze, 5% rabatt\n" +
-                                      "3. Silver, 10% rabatt\n" +
-                                      "4. Gold, 15% rabatt");
+                                      "1. Bronze, 5% rabatt\n" +
+                                      "2. Silver, 10% rabatt\n" +
+                                      "3. Gold, 15% rabatt");
                     string inputRabatt = Console.ReadLine();
 
                     switch (inputRabatt)
                     {
                         case "1":
                         {
-                            CustomerList.Add(new Customer(newCustomerName, newCustomerPassword));
+                            CustomerList.Add(new Bronze(newCustomerName, newCustomerPassword));
                             break;
                         }
                         case "2":
                         {
-                            CustomerList.Add(new Bronze(newCustomerName, newCustomerPassword));
-                                break;
-                        }
-                        case "3":
-                        {
                             CustomerList.Add(new Silver(newCustomerName, newCustomerPassword));
                             break;
                         }
-                        case "4":
+                        case "3":
                         {
                             CustomerList.Add(new Gold(newCustomerName, newCustomerPassword));
                             break;
                         }
+
                         default:
                         {
-                            Console.WriteLine("Du har gjort ett ogiltigt val, vänligen välj rabatt");
+                            CustomerList.Add(new Customer(newCustomerName, newCustomerPassword));
+                            Console.WriteLine("Ok, ingen rabatt till dig :-)");
                             Console.ReadKey();
                             break;
                         }
                     }
 
 
-                    //Lägger till kund i CustomerList
-                    //CustomerList.Add(new Customer(newCustomerName, newCustomerPassword));
                     meny1 = false;
                 }
                 else if (inputMeny1 == "2")
@@ -115,9 +169,10 @@ class Program
 
 
 
+
                 //----------------------------------------------Logga in--------------------------------------------------------------
 
-                
+
 
                 while (!inlogg)
                 {
@@ -149,7 +204,7 @@ class Program
                         }
                         else if (inputX == "2")
                         {
-                            
+
                         }
                         else if (inputX == "3")
                         {
@@ -189,18 +244,55 @@ class Program
             }
 
 
+            //Skriver kunderna till filen KristerUsers.txt som läggs på skrivbordet
+
+            using (StreamWriter sw = new StreamWriter(file))
+            {
+                foreach (var kund in CustomerList)
+                {
+                    if (kund is Bronze bronze)
+                    {
+                        sw.Write("Bronze,");
+                        sw.Write($"{kund.CustomerName},");
+                        sw.WriteLine(kund.CustomerPassword);
+
+                    }
+                    else if(kund is Silver silver)
+                    {
+                        sw.Write("Silver,");
+                        sw.Write($"{kund.CustomerName},");
+                        sw.WriteLine(kund.CustomerPassword);
+
+                    }
+                    else if(kund is Gold gold)
+                    {
+                        sw.Write("Gold,");
+                        sw.Write($"{kund.CustomerName},");
+                        sw.WriteLine(kund.CustomerPassword);
+
+                    }
+                    else
+                    {
+                        sw.Write("Basic,");
+                        sw.Write($"{kund.CustomerName},");
+                        sw.WriteLine(kund.CustomerPassword);
+                    }
+                }
+            }
+
+
 
 
             //----------------------------------------------Inlogg klar, nu in i butiken---------------------------------------------------------------        
 
-            
+
             while (visaButik)
             {
 
                 Shop.VisaButik();
 
                 string inputMeny2 = Console.ReadLine();
-                
+
                 while (handla)
                 {
                     if (inputMeny2 == "1")
@@ -328,12 +420,12 @@ class Program
 
 
                     //------------------------------------------------Visa kundvagnen---------------------------------------------------
-                    
+
 
                     else if (inputMeny2 == "2")
                     {
 
-                        
+
 
                         Console.WriteLine(currentUser);
 
@@ -375,7 +467,7 @@ class Program
                         visaButik = false;
                         break;
                     }
-                    
+
                     //Logga ut användare
                     else if (inputMeny2 == "4")
                     {
@@ -385,7 +477,7 @@ class Program
                         visaButik = false;
                         break;
                     }
-                    
+
                     else
                     {
                         Console.WriteLine("Du gjorde ett ogiltigt val");
@@ -393,11 +485,11 @@ class Program
                         break;
 
                     }
-                    
+
                 }
-                
+
             }
-            
+
         }
     }
 }
