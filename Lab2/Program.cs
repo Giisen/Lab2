@@ -12,11 +12,14 @@ class Program
     public static void Main(string[] args)
     {
 
-        // Skapar en lista med produkter
-        List<Products> ProdList = new List<Products>();
-        ProdList.Add(new Products("Midrange", 169, 1));
-        ProdList.Add(new Products("Väska   ", 999, 1));
-        ProdList.Add(new Products("Korg    ", 1999, 1));
+        //// Skapar en lista med produkter
+        //List<Products> ProdList = new List<Products>();
+        //ProdList.Add(new Products("Midrange", 169, 1));
+        //ProdList.Add(new Products("Väska   ", 999, 1));
+        //ProdList.Add(new Products("Korg    ", 1999, 1));
+
+       
+
 
         // Diverse variabler
         Customer? currentUser = null;
@@ -25,7 +28,10 @@ class Program
         bool CustomerNamnOK = false;
         bool CustomerPassOk = false;
         bool loggaut = true;
+        int valuta = 1;
+        string valutaText=String.Empty;
 
+        
 
         List<Customer> CustomerList = new List<Customer>();
 
@@ -93,7 +99,7 @@ class Program
         }
 
 
-
+        
 
         //----------------------------------------------Meny1----------------------------------------------------------
 
@@ -167,6 +173,9 @@ class Program
                 }
 
 
+
+
+                
 
 
 
@@ -283,6 +292,44 @@ class Program
 
 
 
+            Shop.Valuta();
+            bool valutabool = false;
+            while (!valutabool)
+            {
+
+                string inputValuta = Console.ReadLine();
+                switch (inputValuta)
+                {
+                    case "1":
+                        valuta = 1;
+                        valutaText = $"{Shop.valutaLista[0]}";
+                        valutabool = true;
+                        break;
+
+                    case "2":
+                        valuta = 12;
+                        valutaText = $"{Shop.valutaLista[1]}";
+                        valutabool = true;
+                        break;
+
+                    case "3":
+                        valuta = 100;
+                        valutaText = $"{Shop.valutaLista[2]}";
+                        valutabool = true;
+                        break;
+                    default:
+                        valutabool = false;
+                        break;
+                }
+
+            }
+
+            Products.CreateList(valuta, valutaText);
+
+
+
+
+
             //----------------------------------------------Inlogg klar, nu in i butiken---------------------------------------------------------------        
 
 
@@ -297,12 +344,12 @@ class Program
                 {
                     if (inputMeny2 == "1")
                     {
-                        Console.Clear();
-                        Console.WriteLine("Vi har dessa kanonprodukter:\n");
-                        foreach (var prod in ProdList)
-                        {
-                            Console.WriteLine($"{prod.ProduktNamn}\t{prod.Pris} kr st");
-                        }
+                        //Console.Clear();
+                        //Console.WriteLine("Vi har dessa kanonprodukter:\n");
+                        //foreach (var prod in Products.ProdList)
+                        //{
+                        //    Console.WriteLine($"{prod.ProduktNamn}\t{prod.Pris} kr st");
+                        //}
 
 
                         // Vilka produkter vill du köpa?
@@ -310,10 +357,13 @@ class Program
 
                         string inputHandla = Console.ReadLine();
                         int inputantal = 0;
+                        //Skapar en variabel som ger index på varan i min prodList.
+                        int prodIndex = Convert.ToInt32(inputHandla) - 1;
 
                         if (inputHandla == "1")
                         {
-
+                            
+                            
                             try
                             {
                                 Console.WriteLine("Hur många vill du köpa?");
@@ -332,7 +382,7 @@ class Program
 
                             if (inputantal > 0)
                             {
-                                currentUser.CartList.Add(new Products("Midrange", 169, inputantal));
+                                currentUser.CartList.Add(new Products($"{Products.ProdList[prodIndex].ProduktNamn}", 169, inputantal));
                             }
 
                             Console.WriteLine("Vill du fortsätta handla (j) för ja (n) för nej?");
@@ -364,7 +414,7 @@ class Program
 
                             if (inputantal > 0)
                             {
-                                currentUser.CartList.Add(new Products("Väska   ", 999, inputantal));
+                                currentUser.CartList.Add(new Products($"{Products.ProdList[prodIndex].ProduktNamn}", 999, inputantal));
                             }
 
                             Console.WriteLine("Vill du fortsätta handla (j) för ja (n) för nej?");
@@ -396,7 +446,7 @@ class Program
 
                             if (inputantal > 0)
                             {
-                                currentUser.CartList.Add(new Products("Korg     ", 1999, inputantal));
+                                currentUser.CartList.Add(new Products($"{Products.ProdList[prodIndex].ProduktNamn}", 1999, inputantal));
                             }
 
                             Console.WriteLine("Vill du fortsätta handla (j) för ja (n) för nej?");
@@ -410,7 +460,7 @@ class Program
                         else
                         {
                             Console.WriteLine(
-                                "Du har gjort ett ogiltigt val, du kan endast bland produkterna som finns i lager, välj en siffra tack.");
+                                "Du har gjort ett ogiltigt val, du kan endast bland produkterna som finns i lager.");
                             Console.ReadLine();
                         }
 

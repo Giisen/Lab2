@@ -14,7 +14,6 @@ public class Customer
     {
         get { return _CustomerName; }
 
-
     }
 
     private string _CustomerPassword;
@@ -81,15 +80,15 @@ public class Customer
     {
         Console.Clear();
         Console.WriteLine("\nAnvändaren finns inte, vill du skapa en ny användare?\n" +
-                          "1. för att skapa ny användare\n" +
-                          "2. för att försöka logga in igen\n" +
-                          "3. för att stänga programmet.");
+                          "1. För att skapa ny användare\n" +
+                          "2. För att försöka logga in igen\n" +
+                          "3. För att stänga programmet.");
     }
 
-    public virtual decimal Discount()
-    {
-        return Rabatt;
-    }
+    //public virtual decimal Discount()
+    //{
+    //    return Rabatt;
+    //}
     
 
 
