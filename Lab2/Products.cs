@@ -10,12 +10,12 @@ public class Products
         set { _Namn = value; }
     }
 
-    private int _Pris;
+    private double _Pris;
 
-    public int Pris
+    public double Pris
     {
         get { return _Pris; }
-        set { _Pris = value; }
+        set { _Pris = Math.Round(value,2); }
     }
 
 
@@ -36,12 +36,20 @@ public class Products
         set { _valutatext = value; }
     }
 
+    private static double _valuta;
 
-
-    public Products(string name, int price, int antal)
+    public static double Valuta
     {
-        ProduktNamn = name;
-        Pris = price;
+        get { return _valuta; }
+        set { _valuta = value; }
+    }
+
+
+
+    public Products(string name, double price, int antal)
+    {
+        _Namn = name;
+        _Pris = Math.Round(price,2);
         Antal = antal;
     }
 
@@ -49,14 +57,15 @@ public class Products
 
 
     // Skapar en lista med produkter
-    public static List<Products> ProdList = new List<Products>();
+    public  static List<Products> ProdList = new List<Products>();
 
-   public static void CreateList(int valuta, string valutatext)
+   public  static void CreateList(double valuta, string valutatext)
    {
        _valutatext = valutatext;
-       ProdList.Add(new Products("Midrange", 169*valuta, 1));
-       ProdList.Add(new Products("Väska   ", 999*valuta, 1));
-       ProdList.Add(new Products("Korg    ", 1999*valuta, 1));
+       _valuta=valuta;
+       ProdList.Add(new Products("Midrange", 169, 1));
+       ProdList.Add(new Products("Väska   ", 999, 1));
+       ProdList.Add(new Products("Korg    ", 1999, 1));
    }
     
 

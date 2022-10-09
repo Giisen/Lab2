@@ -45,7 +45,7 @@ public abstract class Shop
         int prodIndex = 1;
         foreach (var prod in Products.ProdList)
         {
-            Console.WriteLine($"{prodIndex}. {prod.ProduktNamn}\t{prod.Pris} {Products.ValutaText}");
+            Console.WriteLine($"{prodIndex}. {prod.ProduktNamn}\t{prod.Pris*Products.Valuta} {Products.ValutaText}");
             prodIndex++;
         }
         Console.WriteLine("\nVilken produkt vill du köpa?");

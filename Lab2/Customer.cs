@@ -34,9 +34,9 @@ public class Customer
         set { _logInOk = value; }
     }
 
-    private decimal _Rabatt;
+    private double _Rabatt;
 
-    public decimal Rabatt
+    public double Rabatt
     {
         get { return _Rabatt; }
         set { _Rabatt = value; }
@@ -58,7 +58,7 @@ public class Customer
         _CustomerName = name;
         CustomerPassword = password;
         _CartList = new List<Products>();
-        Rabatt = (decimal)1.0;
+        Rabatt = 1.0;
     }
 
 
@@ -90,19 +90,19 @@ public class Customer
     //    return Rabatt;
     //}
     
-
+    
 
     //Metod för totalsumman för kundvagnen
-    public int KundvagnTotal()
+    public double KundvagnTotal()
     {
-        int totalsumma = 0;
-        int summa = 0;
+        double totalsumma = 0;
+        double summa = 0;
         foreach (var prod in CartList)
         {
-            summa = (prod.Pris * prod.Antal);
+            summa = prod.Pris * prod.Antal;
             totalsumma += summa;
         }
-        return totalsumma;
+        return Math.Round(totalsumma*Products.Valuta,2);
     }
 
 
@@ -122,18 +122,18 @@ public class Customer
         var distinktLista = CartList.Select(p => p.ProduktNamn).Distinct(); //Tar ut distinkta produktnamn.
 
         stringKundvagn += ("\nProdukter:\n");
-        foreach (var prod in distinktLista)
+        foreach (var prod in distinktLista) //distinktLista
         {
             var produkter = CartList.FirstOrDefault(p => p.ProduktNamn == prod);
             antProd = CartList.Where(p => p.ProduktNamn == prod).Sum(p => p.Antal);
-            int totalpris = antProd * produkter.Pris;
-            stringKundvagn += ($"\n{produkter.ProduktNamn}\t antal: {antProd} st\t styckpris: {produkter.Pris} kr\tsumma: {totalpris} kr");
+            double totalpris = Math.Round(antProd * produkter.Pris,2);
+            stringKundvagn += ($"\n{produkter.ProduktNamn}\t antal: {antProd} st\t styckpris: {Math.Round(produkter.Pris*Products.Valuta,2)} {Products.ValutaText}\tsumma: {Math.Round(totalpris*Products.Valuta,2)} {Products.ValutaText}");
         }
 
 
-        stringKundvagn += $"\n\nSumman av din kundvagn: {KundvagnTotal()} kr";
-        stringKundvagn += $"\nRabatt:"+ Math.Floor((1.0-(double)Rabatt) *100)+"%";
-        stringKundvagn += $"\nAtt betala: {Math.Floor(KundvagnTotal()*Rabatt)} kr";
+        stringKundvagn += $"\n\nSumman av din kundvagn: {KundvagnTotal()} {Products.ValutaText}";
+        stringKundvagn += $"\nRabatt:"+ Math.Round((1.0-Rabatt) *100,2)+"%";
+        stringKundvagn += $"\nAtt betala: {Math.Round(KundvagnTotal()*Rabatt,2)} {Products.ValutaText}";
 
         return stringKundvagn;
     }

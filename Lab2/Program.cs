@@ -28,7 +28,7 @@ class Program
         bool CustomerNamnOK = false;
         bool CustomerPassOk = false;
         bool loggaut = true;
-        int valuta = 1;
+        
         string valutaText=String.Empty;
 
         
@@ -293,6 +293,7 @@ class Program
 
 
             Shop.Valuta();
+            double valuta = 1.0;
             bool valutabool = false;
             while (!valutabool)
             {
@@ -301,19 +302,19 @@ class Program
                 switch (inputValuta)
                 {
                     case "1":
-                        valuta = 1;
+                        valuta = 1.0;
                         valutaText = $"{Shop.valutaLista[0]}";
                         valutabool = true;
                         break;
 
                     case "2":
-                        valuta = 12;
+                        valuta = 0.12;
                         valutaText = $"{Shop.valutaLista[1]}";
                         valutabool = true;
                         break;
 
                     case "3":
-                        valuta = 100;
+                        valuta = 100.0;
                         valutaText = $"{Shop.valutaLista[2]}";
                         valutabool = true;
                         break;
@@ -324,7 +325,8 @@ class Program
 
             }
 
-            Products.CreateList(valuta, valutaText);
+            Products.ProdList.Clear();
+            Products.CreateList(valuta, valutaText); 
 
 
 
@@ -344,15 +346,7 @@ class Program
                 {
                     if (inputMeny2 == "1")
                     {
-                        //Console.Clear();
-                        //Console.WriteLine("Vi har dessa kanonprodukter:\n");
-                        //foreach (var prod in Products.ProdList)
-                        //{
-                        //    Console.WriteLine($"{prod.ProduktNamn}\t{prod.Pris} kr st");
-                        //}
-
-
-                        // Vilka produkter vill du köpa?
+                        
                         Shop.Handla();
 
                         string inputHandla = Console.ReadLine();
@@ -382,7 +376,7 @@ class Program
 
                             if (inputantal > 0)
                             {
-                                currentUser.CartList.Add(new Products($"{Products.ProdList[prodIndex].ProduktNamn}", 169, inputantal));
+                                currentUser.CartList.Add(new Products($"{Products.ProdList[prodIndex].ProduktNamn}", Products.ProdList[prodIndex].Pris, inputantal));
                             }
 
                             Console.WriteLine("Vill du fortsätta handla (j) för ja (n) för nej?");
@@ -414,7 +408,7 @@ class Program
 
                             if (inputantal > 0)
                             {
-                                currentUser.CartList.Add(new Products($"{Products.ProdList[prodIndex].ProduktNamn}", 999, inputantal));
+                                currentUser.CartList.Add(new Products($"{Products.ProdList[prodIndex].ProduktNamn}", Products.ProdList[prodIndex].Pris, inputantal));
                             }
 
                             Console.WriteLine("Vill du fortsätta handla (j) för ja (n) för nej?");
@@ -446,7 +440,7 @@ class Program
 
                             if (inputantal > 0)
                             {
-                                currentUser.CartList.Add(new Products($"{Products.ProdList[prodIndex].ProduktNamn}", 1999, inputantal));
+                                currentUser.CartList.Add(new Products($"{Products.ProdList[prodIndex].ProduktNamn}", Products.ProdList[prodIndex].Pris, inputantal));
                             }
 
                             Console.WriteLine("Vill du fortsätta handla (j) för ja (n) för nej?");
