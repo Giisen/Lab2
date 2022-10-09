@@ -49,12 +49,11 @@ public class Products
     public Products(string name, double price, int antal)
     {
         _Namn = name;
-        _Pris = Math.Round(price,2);
+        _Pris = price;
         Antal = antal;
     }
 
    
-
 
     // Skapar en lista med produkter
     public  static List<Products> ProdList = new List<Products>();
@@ -68,7 +67,5 @@ public class Products
        ProdList.Add(new Products("Korg    ", 1999, 1));
    }
     
-
-
 
 }

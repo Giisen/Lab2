@@ -4,6 +4,6 @@ public class Silver : Customer
 {
     public Silver(string name, string password) : base(name, password)
     {
-        Rabatt = 0.89;
+        Rabatt = 0.90;
     }
 }

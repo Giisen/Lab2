@@ -11,16 +11,6 @@ class Program
 {
     public static void Main(string[] args)
     {
-
-        //// Skapar en lista med produkter
-        //List<Products> ProdList = new List<Products>();
-        //ProdList.Add(new Products("Midrange", 169, 1));
-        //ProdList.Add(new Products("Väska   ", 999, 1));
-        //ProdList.Add(new Products("Korg    ", 1999, 1));
-
-       
-
-
         // Diverse variabler
         Customer? currentUser = null;
         string inputMeny1 = string.Empty;
@@ -28,19 +18,12 @@ class Program
         bool CustomerNamnOK = false;
         bool CustomerPassOk = false;
         bool loggaut = true;
-        
         string valutaText=String.Empty;
 
         
 
         List<Customer> CustomerList = new List<Customer>();
-
-        //Skapar en lista med både användarnamn och lösenord
-        //CustomerList.Add(new Bronze("k", "l"));
-        //CustomerList.Add(new Silver("Knatte", "123"));
-        //CustomerList.Add(new Customer("Fnatte", "321"));
-        //CustomerList.Add(new Gold("Tjatte", "213"));
-
+        
 
         var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         var file = Path.Combine(desktop,"KristerUsers.txt");
@@ -63,26 +46,21 @@ class Program
                     if (discount =="Basic")
                     {
                         CustomerList.Add(new Customer($"{userName}", $"{passw}"));
-
-
                     }
                     
                     if (discount == "Bronze")
                     {
                         CustomerList.Add(new Bronze($"{userName}", $"{passw}"));
-                        
                     }
                     
                     if (discount == "Silver")
                     {
                         CustomerList.Add(new Silver($"{userName}", $"{passw}"));
-                       
                     }
                     
                     if (discount == "Gold")
                     {
                         CustomerList.Add(new Gold($"{userName}", $"{passw}"));
-                        
                     }
                     line = sr.ReadLine();
 
@@ -91,7 +69,7 @@ class Program
         }
         else
         {
-            //Skapar en lista med både användarnamn och lösenord
+            //Skapar en lista med användarnamn och lösenord
             CustomerList.Add(new Bronze("k", "l"));
             CustomerList.Add(new Silver("Knatte", "123"));
             CustomerList.Add(new Customer("Fnatte", "321"));
@@ -211,10 +189,7 @@ class Program
                             break;
 
                         }
-                        else if (inputX == "2")
-                        {
-
-                        }
+                        
                         else if (inputX == "3")
                         {
 

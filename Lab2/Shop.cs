@@ -18,13 +18,10 @@ public abstract class Shop
             Console.WriteLine($"{prodIndex}. {val}");
             prodIndex++;
         }
-
         
     }
 
-
-
-
+    
 
     public static void VisaButik()
     {
@@ -37,6 +34,7 @@ public abstract class Shop
                           "4. Logga ut");
     }
 
+
     public static void Handla()
     {
         Console.Clear();
@@ -45,18 +43,11 @@ public abstract class Shop
         int prodIndex = 1;
         foreach (var prod in Products.ProdList)
         {
-            Console.WriteLine($"{prodIndex}. {prod.ProduktNamn}\t{prod.Pris*Products.Valuta} {Products.ValutaText}");
+            Console.WriteLine($"{prodIndex}. {prod.ProduktNamn}\t{Math.Round(prod.Pris*Products.Valuta,2)} {Products.ValutaText}");
             prodIndex++;
         }
         Console.WriteLine("\nVilken produkt vill du köpa?");
-
-
-
-        //Console.WriteLine("\nVilken produkt vill du köpa?\n" +
-        //                  "1. Midrange\n" +
-        //                  "2. Väska   \n" +
-        //                  "3. Korg\n");
-
+        
     }
 }
 

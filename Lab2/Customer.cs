@@ -85,11 +85,6 @@ public class Customer
                           "3. För att stänga programmet.");
     }
 
-    //public virtual decimal Discount()
-    //{
-    //    return Rabatt;
-    //}
-    
     
 
     //Metod för totalsumman för kundvagnen
@@ -105,9 +100,7 @@ public class Customer
         return Math.Round(totalsumma*Products.Valuta,2);
     }
 
-
-
-
+    
 
     // Visar kundvagnen
     public override string ToString()
@@ -122,7 +115,7 @@ public class Customer
         var distinktLista = CartList.Select(p => p.ProduktNamn).Distinct(); //Tar ut distinkta produktnamn.
 
         stringKundvagn += ("\nProdukter:\n");
-        foreach (var prod in distinktLista) //distinktLista
+        foreach (var prod in distinktLista)
         {
             var produkter = CartList.FirstOrDefault(p => p.ProduktNamn == prod);
             antProd = CartList.Where(p => p.ProduktNamn == prod).Sum(p => p.Antal);
