@@ -23,16 +23,16 @@ class Program
         
 
         List<Customer> CustomerList = new List<Customer>();
-        
+
 
         var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        var file = Path.Combine(desktop,"KristerUsers.txt");
+        var file = Path.Combine(desktop, "KristerUsers.txt");
         if (File.Exists(file))
         {
             using (StreamReader sr = new StreamReader(file))
             {
                 var line = sr.ReadLine();
-               
+
 
                 while (line != null)
                 {
@@ -40,24 +40,24 @@ class Program
                     string discount = split[0];
                     string userName = split[1];
                     string passw = split[2];
-                    
 
 
-                    if (discount =="Basic")
+
+                    if (discount == "Basic")
                     {
                         CustomerList.Add(new Customer($"{userName}", $"{passw}"));
                     }
-                    
+
                     if (discount == "Bronze")
                     {
                         CustomerList.Add(new Bronze($"{userName}", $"{passw}"));
                     }
-                    
+
                     if (discount == "Silver")
                     {
                         CustomerList.Add(new Silver($"{userName}", $"{passw}"));
                     }
-                    
+
                     if (discount == "Gold")
                     {
                         CustomerList.Add(new Gold($"{userName}", $"{passw}"));
@@ -77,7 +77,7 @@ class Program
         }
 
 
-        
+
 
         //----------------------------------------------Meny1----------------------------------------------------------
 
@@ -99,10 +99,29 @@ class Program
 
                 if (inputMeny1 == "1")
                 {
-                    Console.WriteLine("Ange ett användarnamn:");
-                    string newCustomerName = Console.ReadLine();
-                    Console.WriteLine("Ange ett lösenord:");
-                    string newCustomerPassword = Console.ReadLine();
+                    string newCustomerName = String.Empty;
+                    string newCustomerPassword = String.Empty;
+                    bool testNull = true;
+                    while (testNull)
+                    {
+                        Console.WriteLine("Ange ett användarnamn:");
+                        newCustomerName = Console.ReadLine();
+                        Console.WriteLine("Ange ett lösenord:");
+                        newCustomerPassword = Console.ReadLine();
+
+                        if (newCustomerName.Length == 0 || newCustomerPassword.Length == 0)
+                        {
+                            Console.WriteLine("Användarnamn eller lösenord kan inte vara tomt.");
+                            Console.ReadLine();
+                            testNull = true;
+                        }
+                        else
+                        {
+                            testNull=false;
+                        }
+                    }
+
+                    Console.Clear();
                     Console.WriteLine("Välj din rabattnivå :-) :\n" +
                                       "1. Bronze, 5% rabatt\n" +
                                       "2. Silver, 10% rabatt\n" +
