@@ -294,6 +294,7 @@ class Program
                         valutabool = true;
                         break;
                     default:
+                        Console.WriteLine("Ogiltigt val, var god försök igen");
                         valutabool = false;
                         break;
                 }
@@ -326,13 +327,11 @@ class Program
 
                         string inputHandla = Console.ReadLine();
                         int inputantal = 0;
-                        //Skapar en variabel som ger index på varan i min prodList.
-                        int prodIndex = Convert.ToInt32(inputHandla) - 1;
-
+                        
                         if (inputHandla == "1")
                         {
-                            
-                            
+
+                            // Provar Try and Catch
                             try
                             {
                                 Console.WriteLine("Hur många vill du köpa?");
@@ -351,7 +350,7 @@ class Program
 
                             if (inputantal > 0)
                             {
-                                currentUser.CartList.Add(new Products($"{Products.ProdList[prodIndex].ProduktNamn}", Products.ProdList[prodIndex].Pris, inputantal));
+                                currentUser.CartList.Add(new Products($"{Products.ProdList[0].ProduktNamn}", Products.ProdList[0].Pris, inputantal));
                             }
 
                             Console.WriteLine("Vill du fortsätta handla (j) för ja (n) för nej?");
@@ -383,7 +382,7 @@ class Program
 
                             if (inputantal > 0)
                             {
-                                currentUser.CartList.Add(new Products($"{Products.ProdList[prodIndex].ProduktNamn}", Products.ProdList[prodIndex].Pris, inputantal));
+                                currentUser.CartList.Add(new Products($"{Products.ProdList[1].ProduktNamn}", Products.ProdList[1].Pris, inputantal));
                             }
 
                             Console.WriteLine("Vill du fortsätta handla (j) för ja (n) för nej?");
@@ -415,7 +414,7 @@ class Program
 
                             if (inputantal > 0)
                             {
-                                currentUser.CartList.Add(new Products($"{Products.ProdList[prodIndex].ProduktNamn}", Products.ProdList[prodIndex].Pris, inputantal));
+                                currentUser.CartList.Add(new Products($"{Products.ProdList[2].ProduktNamn}", Products.ProdList[2].Pris, inputantal));
                             }
 
                             Console.WriteLine("Vill du fortsätta handla (j) för ja (n) för nej?");
@@ -428,8 +427,7 @@ class Program
                         }
                         else
                         {
-                            Console.WriteLine(
-                                "Du har gjort ett ogiltigt val, du kan endast bland produkterna som finns i lager.");
+                            Console.WriteLine("Du har gjort ett ogiltigt val, du kan endast bland produkterna som finns i lager.");
                             Console.ReadLine();
                         }
 
