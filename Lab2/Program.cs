@@ -112,7 +112,7 @@ class Program
                         if (newCustomerName.Length == 0 || newCustomerPassword.Length == 0)
                         {
                             Console.WriteLine("Användarnamn eller lösenord kan inte vara tomt.");
-                            Console.ReadLine();
+                            Console.ReadKey();
                             testNull = true;
                         }
                         else
@@ -168,7 +168,6 @@ class Program
                     Console.ReadLine();
                     continue;
                 }
-
 
 
 
